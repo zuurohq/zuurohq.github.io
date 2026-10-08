@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MNQ Play - Plan v1.3</title>
+<title>MNQ Play - Plan v1.4</title>
 <style>
 :root{--bg:#f4f6f9;--card:#ffffff;--tx:#17202a;--mu:#5d6b7a;--bd:#dde3ea;--g:#1a9a52;--r:#d6453d;--a:#d98c1a;--b:#2b6cdf;--soft:#eef2f7}
 @media(prefers-color-scheme:dark){:root{--bg:#0f1419;--card:#18202a;--tx:#e8eef4;--mu:#9aa8b6;--bd:#2a3541;--g:#3fb970;--r:#f0605a;--a:#e8a93a;--b:#6aa3ff;--soft:#1f2933}}
@@ -39,7 +39,7 @@ label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{disp
 .prog{height:14px;background:var(--soft);border-radius:8px;overflow:hidden;margin:6px 0}.prog i{display:block;height:100%;background:var(--b)}
 </style></head><body><div class="wrap">
 
-<span class="pill ok">Plan v1.3 - corrected</span><span class="pill">8 October 2026</span><span class="pill warn">Practice first - nothing is live</span>
+<span class="pill ok">Plan v1.4 - corrected</span><span class="pill">8 October 2026</span><span class="pill warn">Practice first - nothing is live</span>
 <h1>MNQ Play: your plan in plain words</h1>
 <div class="sub">Trade the RangeProb-Tracks <b>NQ calls</b> on the micro contract (MNQ) toward a Lucid 50K Flex evaluation and payouts. One evaluation at a time. One funded account at a time. No copy trading.</div>
 
@@ -110,9 +110,9 @@ label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{disp
  <div class="rule"><div class="k">1</div><div><b>Which calls:</b>Only NQ calls that last 15 to 150 minutes. Take a call only if you have no trade open. Skip the rest.</div></div>
  <div class="rule"><div class="k">2</div><div><b>Direction:</b>Do exactly what the call says (buy or sell).</div></div>
  <div class="rule"><div class="k">3</div><div><b>Profit level (the "target"):</b>Use the <b>second</b> price level in the call (the "70%" level) for the evaluation and the first $4,000. Use the <b>first</b> level (the "90%" level) for the five small $150 days.</div></div>
- <div class="rule"><div class="k">4</div><div><b>Loss level (the "stop"):</b>On the other side, 1.33 times as far away as the profit level. Size the trade so the stop can never cost more than $2,000 (the size calculator does this). A stop-out uses most or all of your allowance.</div></div>
+ <div class="rule"><div class="k">4</div><div><b>Loss level (the "stop"):</b>On the other side, 1.33 times as far away as the profit level. Size the trade so the stop costs about $2,000 or less (including costs) and never more than the room you have left today above your loss floor (the size calculator checks this and says SKIP if nothing fits). A stop-out uses most or all of your allowance.</div></div>
  <div class="rule"><div class="k">5</div><div><b>Set both levels the moment you enter.</b>Enter, attach the profit level and the stop together, then walk away.</div></div>
- <div class="rule"><div class="k">6</div><div><b>Time limit:</b>If neither level is touched by the time one call-length has passed (a 15-minute call = 15 minutes), close the trade at the market price.</div></div>
+ <div class="rule"><div class="k">6</div><div><b>Time limit:</b>Evaluation and the first funded profit: if neither level is touched by the time one call-length has passed (a 15-minute call = 15 minutes), close the trade at the market price. The small profit days have no call-length limit, but everything is flat by 4:45 pm New York time. (The small-day rule has not yet been replayed with that close.)</div></div>
  <div class="rule"><div class="k">7</div><div><b>Everything flat by 4:45 pm New York time, Monday to Friday.</b>Lucid closes any open trade then (earlier on holidays with early closes). Do not enter a trade that cannot finish before 4:45 pm. Trading restarts at 6:00 pm Sunday to Thursday.</div></div>
  <div class="rule"><div class="k">8</div><div><b>Contract limit:</b>Evaluation: up to 40 micros (4 minis). Funded account: 20 micros while profit is under $1,000, 30 micros from $1,000, 40 micros from $2,000. This updates after each day, and a payout lowers it again.</div></div>
  <div class="rule"><div class="k">9</div><div><b>Write down every trade</b> (date, call, size, result, any rule you broke). This is how we check the plan works.</div></div>
@@ -124,6 +124,7 @@ label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{disp
  <div class="row2">
   <div><label class="f">Which step are you on?</label><select id="ph"><option value="E">Evaluation day (profit level 2nd)</option><option value="F">Funded: first $4,000 (profit level 2nd)</option><option value="H">Funded: $150 small day (profit level 1st)</option></select></div>
   <div><label class="f">Distance to the profit level, in points (from the call)</label><input type="number" id="pts" value="30" min="1" step="0.25"></div>
+  <div><label class="f">Room left above your loss floor today ($) - see your platform. Evaluation or new funded account: 2,000</label><input type="number" id="room" value="2000" min="0" step="50"></div>
   <div id="tierbox"><label class="f">Funded account profit so far (sets your contract limit)</label><select id="tier"><option value="20">Under $1,000 (limit 20 micros)</option><option value="30">$1,000 to $1,999 (limit 30)</option><option value="40">$2,000 or more (limit 40)</option></select></div>
  </div>
  <div class="out" id="out2"></div>
@@ -139,8 +140,9 @@ label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{disp
  <p class="sub" style="margin-top:0">Purpose: check that you can follow the rules and that the calls reach you in time. <b>It cannot prove the plan makes money</b> (one trade a day gives only about 20 trades in 30 days).</p>
  <div class="row2">
   <div><label class="f">How did the trade end?</label><select id="kind"><option value="tp">Reached the profit level</option><option value="sl">Hit the stop</option><option value="tw">Closed by the time limit</option><option value="fc">Closed by the 4:45 pm close</option></select></div>
-  <div><label class="f">Result in dollars after costs (type the sign: minus for a loss)</label><input type="number" id="amt" placeholder="e.g. 1450 or -2010" step="1"></div>
+  <div><label class="f">Result in dollars after costs (type the sign: minus for a loss)</label><input type="number" id="amt" placeholder="e.g. 1450 or -1990" step="1"></div>
  </div>
+ <div><label class="f">Notes (time the call reached you, phase, contracts, fill prices)</label><input type="text" id="note" style="width:100%;background:var(--soft);border:1px solid var(--bd);border-radius:8px;padding:8px 10px"></div>
  <label class="chk" style="border:0"><input type="checkbox" id="brk"><span>I broke a rule on this trade</span></label>
  <p><button id="add">Add this trade</button> <button class="alt" id="undo">Undo last</button> <button class="alt" id="reset">Clear everything</button></p>
  <div id="trk"></div>
@@ -190,7 +192,7 @@ label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{disp
 <tr><td>8 Oct</td><td>Replayed 3 years of NQ calls on 1-minute prices. Fixed two of my own mistakes (peeking at the outcome; wrong cost).</td></tr>
 <tr><td>8 Oct</td><td>Chose the second price level as the candidate; built this plan (v1) and the interactive tools (v1.1, v1.2).</td></tr>
 <tr><td>8 Oct</td><td>Gold (MGC) test finished: the first level shows no help on gold; second and third levels look similar to MNQ, also near break-even.</td></tr>
-<tr><td>8 Oct</td><td><b>Second independent review (GPT-6.1-sol): FAIL as written.</b> v1.3 corrects the calculator, adds the 4:45 pm close and contract limits, removes the "no-edge still profitable" claim, replaces the tracker's "GO", and uses the reviewer's numbers.</td></tr>
+<tr><td>9 Oct</td><td><b>v1.4:</b> same fixes as the 25K review: size calculator checks your remaining room and says SKIP, small-day size really nets $150, clearer stop and time rules, notes field in the tracker.</td></tr><tr><td>8 Oct</td><td><b>Second independent review (GPT-6.1-sol): FAIL as written.</b> v1.3 corrects the calculator, adds the 4:45 pm close and contract limits, removes the "no-edge still profitable" claim, replaces the tracker's "GO", and uses the reviewer's numbers.</td></tr>
 </table></div>
 
 <p class="note" style="margin-top:20px">This is research and planning, not financial advice. Results come from replays and computer estimates; real trading can lose money. Firm rules were read from Lucid's public help pages in August 2026 and can change; check them before you act. Nothing here places a trade or buys anything.</p>
@@ -213,20 +215,23 @@ function scale(){
  $("out3").innerHTML=`<div>Accounts running at once (all firms)<b>${slots}</b></div><div>Evaluations bought over ${mo} month(s)<b>${Math.round(att)}</b></div><div>Money you spend<b class="r">${fm(spend)}</b></div><div>First payouts (average)<b class="g">${pays.toFixed(1)}</b></div><div>Money back (average)<b class="g">${fm(back)}</b></div><div>Average result<b class="${net>=0?'g':'r'}">${fm(net)}</b></div>`;
  let w=`About 3 evaluations per month per account if you take one trade a day. Chance of at least one payout: ${Math.round(atleast*100)}%. `;
  if(slots>8)w+="You have more accounts than there are different calls on a typical day (about 8): do not copy a call. ";
- w+="Accounts on the same market tend to win and lose on the same days, so real results swing more than the average suggests. Estimates only.";
+ w+="Accounts on the same market tend to win and lose on the same days, so real results swing more than the average suggests. This assumes every try is independent, about 3 tries a month per account (unproven) and that payouts arrive inside the months you chose (real timing is slower). Check your real membership terms. Estimates only.";
  $("why3").textContent=w;
 }
 ["n","fee","mon","sc"].forEach(i=>$(i).addEventListener("input",calc));["sl","fi","mo","fee","sc"].forEach(i=>$(i).addEventListener("input",scale));calc();scale();
 function size(){
- const ph=$("ph").value,p=+$("pts").value;$("tierbox").style.display=ph==="E"?"none":"block";if(!(p>0)){$("out2").innerHTML="";return}
- const cap=ph==="E"?40:+$("tier").value;let m,profit,stopPts,loss,msg="";
- if(ph==="H"){m=Math.max(1,Math.min(cap,Math.round(75/p)));stopPts=2000/(2*m);profit=m*2*p;loss=2000;msg="The stop is set so the most you can lose on this small day is $2,000. Remember: flat by 4:45 pm New York time."}
- else{m=Math.max(1,Math.min(cap,Math.floor(750/p)));stopPts=(4/3)*p;profit=m*2*p;loss=m*2*stopPts;msg=(Math.floor(750/p)>cap?`You hit your limit of ${cap} micros, so the profit is smaller than $1,500 and the stop costs less than $2,000. `:"")+"The stop is 1.33 times as far as the profit level. Flat by 4:45 pm New York time."}
- $("out2").innerHTML=`<div>Micro contracts to use<b class="b">${m}</b><small>${(m/10).toFixed(1)} minis, limit ${cap}</small></div><div>If the profit level is reached<b class="g">${fm(profit)}</b><small>before costs</small></div><div>Stop distance<b>${stopPts.toFixed(1)} points</b></div><div>If the stop is hit<b class="r">${fm(-loss)}</b><small>before costs</small></div>`;
- $("why2").textContent=msg+" Costs add about $1 or $2 per micro round trip. Check your allowance: a loss bigger than what is left of your $2,000 ends the account.";
+ const ph=$("ph").value,p=+$("pts").value,room=Math.min(2000,+$("room").value||0);$("tierbox").style.display=ph==="E"?"none":"block";if(!(p>0)){$("out2").innerHTML="";return}
+ const cap=ph==="E"?40:+$("tier").value,C=1.5;let m,gross,net,stopPts,loss,msg="",ok=true;
+ if(ph==="H"){m=Math.ceil(150/(2*p-C));if(!(2*p-C>0))m=cap+1;if(m>cap){ok=false;m=cap}
+  net=m*(2*p-C);loss=Math.min(room,2000);stopPts=Math.max(0,(loss-C*m)/(2*m));gross=m*2*p;
+  msg=ok?"This day should net at least $150 if the profit level is reached. The stop is a fixed dollar amount (about $"+loss+" including costs): this exact rule has not been replayed with the 4:45 pm close. Flat by 4:45 pm New York time, no call-length limit.":"Your limit of "+cap+" micros cannot reach $150 net at this distance, so this day would NOT count as a qualifying profit day. Skip it or accept it as a smaller trade."}
+ else{m=Math.floor(room/(2*(4/3)*p+C));if(m<1){m=0}m=Math.min(cap,m);stopPts=(4/3)*p;gross=m*2*p;net=m*(2*p-C);loss=m*(2*stopPts+C);
+  msg=m===0?"SKIP: the stop would cost more than the room you have left. Do not take this trade.":((Math.floor(room/(2*(4/3)*p+C))>cap?`You hit your limit of ${cap} micros, so the profit is smaller than your aim. `:"")+"The stop is 1.33 times as far as the profit level; close the trade after one call-length if neither level is touched. Flat by 4:45 pm New York time.")}
+ $("out2").innerHTML=m===0?`<div>Contracts<b class="r">SKIP</b></div><div>Reason<b>not enough room</b></div>`:`<div>Micro contracts to use<b class="b">${m}</b><small>${(m/10).toFixed(1)} minis, limit ${cap}</small></div><div>If the profit level is reached<b class="g">${fm(net)}</b><small>after about $1.5 per micro costs</small></div><div>Stop distance<b>${stopPts.toFixed(1)} points</b></div><div>If the stop is hit<b class="r">${fm(-loss)}</b><small>including costs</small></div>`;
+ $("why2").textContent=msg+" Costs are an estimate. If your real room above the loss floor is smaller, type it in: the calculator sizes the stop to fit.";
 }
-["ph","pts","tier"].forEach(i=>$(i).addEventListener("input",size));size();
-const items=["Only ONE evaluation / ONE funded account is open right now","This call is on NQ and lasts 15 to 150 minutes","I have no trade open (I am flat)","I will use the call's direction, nothing else","Profit level = 2nd level (evaluation, first $4,000) or 1st level ($150 days)","Stop is on the other side, 1.33 times as far, and costs at most $2,000","Contracts checked with the size calculator and my contract limit","Profit level AND stop are entered together, and I will not move them","The trade can finish before 4:45 pm New York time","I am not copying this call to any other account"];
+["ph","pts","tier","room"].forEach(i=>$(i).addEventListener("input",size));size();
+const items=["Only ONE evaluation / ONE funded account is open right now","This call is on NQ and lasts 15 to 150 minutes","I have no trade open (I am flat)","I will use the call's direction, nothing else","Profit level = 2nd level (evaluation, first $4,000) or 1st level ($150 days)","Stop is on the other side, 1.33 times as far, and fits inside the room I have left above my loss floor","Contracts checked with the size calculator and my contract limit","Profit level AND stop are entered together, and I will not move them","The trade can finish before 4:45 pm New York time","I am not copying this call to any other account"];
 let ck={};try{ck=JSON.parse(localStorage.getItem("mnq_ck13")||"{}")}catch(e){}
 function drawck(){const el=$("chk");const cnt=Object.values(ck).filter(Boolean).length;el.innerHTML=items.map((t,i)=>`<label class="chk"><input type="checkbox" data-i="${i}" ${ck[i]?"checked":""}><span>${t}</span></label>`).join("")+`<p><span class="status ${cnt===items.length?'st-ok':'st-no'}" id="cs"></span> <button class="alt" id="cr">Untick all</button></p>`;
  $("cs").textContent=cnt===items.length?"All ticked: OK to place the (practice) trade":"Not ready: "+(items.length-cnt)+" box(es) left";
@@ -239,7 +244,7 @@ function drawtr(){
  const n=tr.length,tp=tr.filter(t=>t.k==="tp").length,sl=tr.filter(t=>t.k==="sl").length,net=tr.reduce((a,t)=>a+t.a,0),brk=tr.filter(t=>t.b).length,dec=tp+sl,w=wil(tp,dec);
  let st,cls;if(brk>0){st=`PAUSE: ${brk} rule break(s). Review before the next trade`;cls="st-bad"}else if(n<20){st=`Keep going: ${20-n} more practice trades for the execution check`;cls="st-no"}else if(n<150){st="Execution check done. This does NOT show profit. Keep practising to 150 trades before any spending decision (and only after the corrected research and a new review)";cls="st-warn"}else{st="150+ trades logged. Look at the range below. Any spending decision is yours and needs the corrected research and a new review first";cls="st-warn"}
  $("trk").innerHTML=`<div class="prog"><i style="width:${Math.min(100,n/1.5)}%"></i></div><div class="out"><div>Trades logged<b>${n}</b><small>20 for the execution check, 150 before any spending decision</small></div><div>Reached profit level first<b>${dec?(100*tp/dec).toFixed(0)+"%":"-"}</b><small>${dec?"likely range "+(100*w[0]).toFixed(0)+"% to "+(100*w[1]).toFixed(0)+"%":""}</small></div><div>Total result<b class="${net>=0?'g':'r'}">${fm(net)}</b></div><div>Rule breaks<b class="${brk?'r':'g'}">${brk}</b></div></div><p><span class="status ${cls}">${st}</span></p>`}
-$("add").addEventListener("click",()=>{const a=parseFloat($("amt").value);if(isNaN(a)){$("amt").focus();return}tr.push({k:$("kind").value,a:a,b:$("brk").checked,t:Date.now()});$("amt").value="";$("brk").checked=false;save();drawtr()});
+$("add").addEventListener("click",()=>{const a=parseFloat($("amt").value);if(isNaN(a)){$("amt").focus();return}tr.push({k:$("kind").value,a:a,b:$("brk").checked,n:($("note")||{}).value||"",t:Date.now()});$("amt").value="";if($("note"))$("note").value="";$("brk").checked=false;save();drawtr()});
 $("undo").addEventListener("click",()=>{tr.pop();save();drawtr()});
 $("reset").addEventListener("click",()=>{if(confirm("Clear all logged trades and ticks?")){tr=[];ck={};try{localStorage.removeItem("mnq_tr13");localStorage.removeItem("mnq_ck13")}catch(e){}drawtr();drawck()}});
 drawtr();
