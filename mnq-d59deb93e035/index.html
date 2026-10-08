@@ -40,7 +40,7 @@ label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{disp
 details{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:700}
 </style></head><body><div class="wrap">
 
-<span class="pill ok">Plan v1.1 - interactive</span><span class="pill">8 October 2026</span><span class="pill warn">Practice first - nothing is live</span>
+<span class="pill ok">Plan v1.2 - interactive</span><span class="pill">8 October 2026</span><span class="pill warn">Practice first - nothing is live</span>
 <h1>MNQ Play: your plan in plain words</h1>
 <div class="sub">Trade the RangeProb-Tracks <b>NQ calls</b> on the micro contract (MNQ) to pass a Lucid 50K Flex evaluation, then reach payouts. One evaluation at a time. One funded account at a time.</div>
 
@@ -87,9 +87,22 @@ details{background:var(--card);border:1px solid var(--bd);border-radius:12px;pad
  <div class="out" id="out1"></div>
  <p class="sub" style="margin-bottom:0" id="why1"></p>
 </div>
+
+<h2>Scale it up: more accounts at the same time</h2>
+<div class="card">
+ <p class="sub" style="margin-top:0">Your rule stays: <b>one trade per call, one account per call, no copying</b>. More accounts simply means each one takes a <b>different</b> call. Lucid allows up to 5 funded accounts (and 10 accounts in total) per household. Other firms with the same rules count as extra accounts.</p>
+ <div class="row2">
+  <div><label class="f">Accounts running at once at Lucid: <b id="slv">1</b></label><input type="range" id="sl" min="1" max="5" value="1"></div>
+  <div><label class="f">Other firms with the same rules (each with the same number of accounts): <b id="fiv">0</b></label><input type="range" id="fi" min="0" max="3" value="0"></div>
+  <div><label class="f">For how many months? <b id="mov">3</b></label><input type="range" id="mo" min="1" max="12" value="3"></div>
+  <div><label class="f">Evaluation price follows the box above. Membership is $100 a month per firm, counted for you.</label><small>The situation (calls help / do not help) follows the box above too.</small></div>
+ </div>
+ <div class="out" id="out3"></div>
+ <p class="sub" style="margin-bottom:0" id="why3"></p>
+</div>
 <h2>Your discipline plan (the rules you never break)</h2>
 <div class="card">
- <div class="rule"><div class="k no">X</div><div><b>One evaluation at a time.</b>Do not start another until this one has passed or failed.</div></div>
+ <div class="rule"><div class="k no">X</div><div><b>One evaluation at a time.</b>Do not start another until this one has passed or failed. (Lucid allows up to 10 evaluations and 5 funded accounts at once per household; one at a time is YOUR rule. Scaling up is optional, see "Scale it up" below.)</div></div>
  <div class="rule"><div class="k no">X</div><div><b>One funded account at a time.</b>No second funded account while one is running.</div></div>
  <div class="rule"><div class="k no">X</div><div><b>No copy trading and no bulk trading.</b>Never put the same call on more than one account.</div></div>
  <div class="rule"><div class="k no">X</div><div><b>Never move the stop. Never add to a trade. Never "make it back".</b>After a loss, wait for the next call.</div></div>
@@ -182,7 +195,7 @@ details{background:var(--card);border:1px solid var(--bd);border-radius:12px;pad
 <tr><td>8 Oct</td><td>Started the same test on gold (MGC) as a second asset.</td></tr>
 </table></div>
 
-<p class="note" style="margin-top:20px">This is research and planning, not financial advice. Results come from replays and computer estimates; real trading can lose money. Firm rules were taken from their public help pages on 26-28 Aug 2026 and can change. Nothing here places a trade or buys anything.</p>
+<p class="note" style="margin-top:20px">This is research and planning, not financial advice. Results come from replays and computer estimates; real trading can lose money. Firm rules were taken from their public help pages (drawdown 26 Aug, account limits 26 Aug, payouts 28 Aug 2026) and can change. Nothing here places a trade or buys anything.</p>
 </div>
 
 <script>
@@ -195,6 +208,18 @@ function calc(){
  $("out1").innerHTML=`<div>Money you spend<b class="r">${fm(spend)}</b></div><div>Evaluations passed (average)<b>${passes.toFixed(1)}</b></div><div>First payouts (average)<b class="g">${pays.toFixed(1)}</b></div><div>Money back (average)<b class="g">${fm(back)}</b></div><div>Average result<b class="${net>=0?'g':'r'}">${fm(net)}</b></div><div>Chance of at least ONE payout<b>${Math.round(atleast*100)}%</b></div>`;
  $("why1").textContent=`These are averages. In real life it swings a lot: with ${n} tries there is about a ${Math.round((1-atleast)*100)}% chance of NO payout at all, and the money spent is gone. Funded accounts pay an average of ${fm(sc.avg)} each.`;
 }
+
+function scale(){
+ const sc=SC[$("sc").value],fee=+$("fee").value||0,mon=+$("mon").value||0;
+ const sl=+$("sl").value,fi=+$("fi").value,mo=+$("mo").value;$("slv").textContent=sl;$("fiv").textContent=fi;$("mov").textContent=mo;
+ const slots=sl*(1+fi),perSlot=3.1*mo,att=slots*perSlot,spend=att*fee+mo*100*(1+fi),pays=att*sc.fp,back=att*sc.pass*sc.avg,net=back-spend,atleast=1-Math.pow(1-sc.fp,att);
+ $("out3").innerHTML=`<div>Accounts running at once (all firms)<b>${slots}</b></div><div>Evaluations bought over ${mo} month(s)<b>${Math.round(att)}</b></div><div>Money you spend<b class="r">${fm(spend)}</b></div><div>First payouts (average)<b class="g">${pays.toFixed(1)}</b></div><div>Money back (average)<b class="g">${fm(back)}</b></div><div>Average result<b class="${net>=0?'g':'r'}">${fm(net)}</b></div>`;
+ let w=`About 3 evaluations per month per account if you take one trade a day. Chance of at least one payout: ${Math.round(atleast*100)}%. `;
+ if(slots>8)w+="You have more accounts than there are different calls on a typical day (about 8), so some accounts would sit idle or be tempted to copy a call. Do not copy. ";
+ w+="Accounts on the same market tend to win and lose on the same days, so real results swing more than the average suggests. Membership is counted once per firm. These are estimates.";
+ $("why3").textContent=w;
+}
+["sl","fi","mo","fee","mon","sc"].forEach(i=>$(i).addEventListener("input",scale));scale();
 function size(){
  const goal=+$("ph").value,p=+$("pts").value;if(!(p>0)){$("out2").innerHTML="";return}
  const need=Math.ceil(goal/(2*p)),m=Math.max(1,Math.min(40,need)),profit=m*2*p;let stopPts,loss;
