@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex"><meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MNQ Play - Plan v1</title>
+<style>
+:root{--bg:#f4f6f9;--card:#ffffff;--tx:#17202a;--mu:#5d6b7a;--bd:#dde3ea;--g:#1a9a52;--r:#d6453d;--a:#d98c1a;--b:#2b6cdf;--soft:#eef2f7}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1419;--card:#18202a;--tx:#e8eef4;--mu:#9aa8b6;--bd:#2a3541;--g:#3fb970;--r:#f0605a;--a:#e8a93a;--b:#6aa3ff;--soft:#1f2933}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:28px;margin:6px 0 4px}h2{font-size:21px;margin:34px 0 10px}h3{font-size:17px;margin:0 0 6px}
+.sub{color:var(--mu)}.pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;background:var(--soft);border:1px solid var(--bd);margin-right:6px}
+.pill.ok{color:var(--g)}.pill.warn{color:var(--a)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.big{font-size:38px;font-weight:800;line-height:1.1}.lab{color:var(--mu);font-size:14px}
+.g{color:var(--g)}.r{color:var(--r)}.a{color:var(--a)}.b{color:var(--b)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step{background:var(--card);border:1px solid var(--bd);border-top:5px solid var(--b);border-radius:12px;padding:12px 14px}
+.step .n{font-weight:800;color:var(--b)}
+.dots{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;margin:10px 0}.dot{aspect-ratio:1;border-radius:50%;background:var(--bd)}
+.dot.p{background:var(--a)}.dot.w{background:var(--g)}
+.legend span{margin-right:16px;font-size:14px}.sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.rule{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd)}.rule:last-child{border:0}
+.rule .k{min-width:30px;height:30px;border-radius:50%;background:var(--b);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.no{background:var(--r)!important}.rule b{display:block}
+table{width:100%;border-collapse:collapse;font-size:15px}th,td{padding:8px 6px;border-bottom:1px solid var(--bd);text-align:left}th{color:var(--mu);font-weight:600}
+.bar{height:16px;border-radius:8px;background:var(--soft);overflow:hidden}.bar i{display:block;height:100%}
+.tl{border-left:3px solid var(--bd);margin-left:8px;padding-left:16px}.tl .it{margin:0 0 14px;position:relative}.tl .it:before{content:"";position:absolute;left:-23px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--b)}
+.tl .it.f:before{background:var(--bd)}
+.note{background:var(--soft);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;font-size:14.5px}
+small{color:var(--mu)}
+
+input,select,button{font:inherit;color:var(--tx)}input[type=number],select{background:var(--soft);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;width:100%}
+input[type=range]{width:100%}button{background:var(--b);color:#fff;border:0;border-radius:9px;padding:9px 14px;cursor:pointer;font-weight:600}button.alt{background:var(--soft);color:var(--tx);border:1px solid var(--bd)}button:hover{filter:brightness(1.08)}
+label.f{display:block;font-size:14px;color:var(--mu);margin:8px 0 4px}.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:560px){.row2{grid-template-columns:1fr}}
+.out{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.out div{background:var(--soft);border-radius:10px;padding:10px 12px}.out b{display:block;font-size:22px}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bd)}.chk input{width:22px;height:22px;margin-top:2px;flex:none}
+.status{display:inline-block;padding:6px 14px;border-radius:999px;font-weight:700}.st-ok{background:var(--g);color:#fff}.st-no{background:var(--soft);color:var(--mu);border:1px solid var(--bd)}.st-warn{background:var(--a);color:#fff}.st-bad{background:var(--r);color:#fff}
+.prog{height:14px;background:var(--soft);border-radius:8px;overflow:hidden;margin:6px 0}.prog i{display:block;height:100%;background:var(--b)}
+details{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:700}
+</style></head><body><div class="wrap">
+
+<span class="pill ok">Plan v1.1 - interactive</span><span class="pill">8 October 2026</span><span class="pill warn">Practice first - nothing is live</span>
+<h1>MNQ Play: your plan in plain words</h1>
+<div class="sub">Trade the RangeProb-Tracks <b>NQ calls</b> on the micro contract (MNQ) to pass a Lucid 50K Flex evaluation, then reach payouts. One evaluation at a time. One funded account at a time.</div>
+
+<h2>The big picture</h2>
+<div class="steps">
+ <div class="step"><div class="n">Step 1 - Pass the test</div><b>Evaluation</b><br>Make $3,000 profit. Best day can be at most half of the total, so you need at least two good days. Never lose more than $2,000 in total.</div>
+ <div class="step"><div class="n">Step 2 - Build a cushion</div><b>Funded: first $4,000</b><br>Two trades aiming for +$2,000 each.</div>
+ <div class="step"><div class="n">Step 3 - Earn the right to withdraw</div><b>Funded: 5 small profit days</b><br>Five days of at least +$150 each, using the safest, closest price level.</div>
+ <div class="step"><div class="n">Step 4 - Get paid</div><b>Payout</b><br>Ask for up to $2,000 (half your profit). You keep 90%.</div>
+</div>
+
+<h2>What to expect (honest numbers)</h2>
+<div class="grid g4">
+ <div class="card"><div class="lab">Chance to PASS an evaluation</div><div class="big b">3 in 10</div><small>about 30%</small></div>
+ <div class="card"><div class="lab">Chance an evaluation leads to a FIRST PAYOUT</div><div class="big g">about 1 in 12</div><small>8.6% (range 6% to 9%)</small></div>
+ <div class="card"><div class="lab">Average paid out per funded account</div><div class="big g">about $1,200</div><small>after the firm's 10% cut</small></div>
+ <div class="card"><div class="lab">Expected profit per $105 evaluation bought</div><div class="big g">about +$250</div><small>best guess; range +$130 to +$260</small></div>
+</div>
+
+<div class="card" style="margin-top:12px">
+ <h3>If you bought 100 evaluations (picture of 100 tries)</h3>
+ <div class="dots" id="dots"></div>
+ <div class="legend"><span><i class="sw" style="background:var(--bd)"></i>70 do not pass: you lose the $105 fee</span><span><i class="sw" style="background:var(--a)"></i>21 pass but never reach a payout</span><span><i class="sw" style="background:var(--g)"></i>9 reach a first payout</span></div>
+ <p class="sub" style="margin-bottom:0">Most tries lose the fee. The money comes from the few that pay out. On average that is <b>$10,500 spent and about $36,200 paid back</b> across 100 tries. This is a computer estimate, not a promise.</p>
+</div>
+
+<div class="grid g2" style="margin-top:12px">
+ <div class="card"><h3>Money picture for ONE evaluation attempt</h3>
+  <table><tr><td>Fee you pay</td><td class="r"><b>-$105</b></td></tr><tr><td>Average money back (most tries return $0)</td><td class="g"><b>+$362</b></td></tr><tr><td><b>Average result</b></td><td class="g"><b>about +$257</b></td></tr></table>
+  <small>Also pay the RangeProb-Tracks membership: $100 per month.</small></div>
+ <div class="card"><h3>What if the calls have NO real edge?</h3>
+  <p style="margin:0">We tested the same plan with random buy/sell directions. The estimate falls to about <b>+$131</b> per try (pass 24%, first payout 5.6%). Part of the profit comes from how the firm's payout rules are built, and the calls roughly double it. <b>If the firm changes its rules or the calls stop working, this can drop to zero or below.</b></p></div>
+</div>
+
+
+<h2>Try the numbers yourself</h2>
+<div class="card">
+ <div class="row2">
+  <div><label class="f">How many evaluations will you buy? <b id="nv">10</b></label><input type="range" id="n" min="1" max="40" value="10"></div>
+  <div><label class="f">Price per evaluation ($)</label><input type="number" id="fee" value="105" min="0"></div>
+  <div><label class="f">Months of RangeProb-Tracks membership ($100 each)</label><input type="number" id="mon" value="1" min="0"></div>
+  <div><label class="f">Which situation?</label><select id="sc"><option value="calls">The calls help (our best estimate)</option><option value="none">The calls do NOT help (coin-flip direction)</option></select></div>
+ </div>
+ <div class="out" id="out1"></div>
+ <p class="sub" style="margin-bottom:0" id="why1"></p>
+</div>
+<h2>Your discipline plan (the rules you never break)</h2>
+<div class="card">
+ <div class="rule"><div class="k no">X</div><div><b>One evaluation at a time.</b>Do not start another until this one has passed or failed.</div></div>
+ <div class="rule"><div class="k no">X</div><div><b>One funded account at a time.</b>No second funded account while one is running.</div></div>
+ <div class="rule"><div class="k no">X</div><div><b>No copy trading and no bulk trading.</b>Never put the same call on more than one account.</div></div>
+ <div class="rule"><div class="k no">X</div><div><b>Never move the stop. Never add to a trade. Never "make it back".</b>After a loss, wait for the next call.</div></div>
+ <div class="rule"><div class="k">1</div><div><b>Which calls:</b>Only NQ calls that last 15 to 150 minutes. Take a call only if you have no trade open. Skip the rest.</div></div>
+ <div class="rule"><div class="k">2</div><div><b>Direction:</b>Do exactly what the call says (buy or sell).</div></div>
+ <div class="rule"><div class="k">3</div><div><b>Profit level (the "target"):</b>Use the <b>second</b> price level in the call (the "70%" level) for the evaluation and for the first $4,000. Use the <b>first</b> level (the "90%" level) for the five small $150 days.</div></div>
+ <div class="rule"><div class="k">4</div><div><b>Loss level (the "stop"):</b>This is "full port": a stop-out uses up the whole $2,000 allowance, so that evaluation or funded account ends. On the other side of the profit level, 1.33 times as far away. Example: profit level 30 points away means stop 40 points away. For the $150 days the stop is set so you risk at most $2,000.</div></div>
+ <div class="rule"><div class="k">5</div><div><b>Set both levels the moment you enter.</b>Enter, attach the profit level and the stop together, then walk away.</div></div>
+ <div class="rule"><div class="k">6</div><div><b>Time limit:</b>If neither level is touched by the time one call-length has passed (a 15-minute call = 15 minutes), close the trade at the market price. The $150 days have no time limit: wait for profit level or stop.</div></div>
+ <div class="rule"><div class="k">7</div><div><b>Size:</b>Pick the number of micro contracts so the profit level pays the amount in the table below. Never more than 40 micros (4 minis).</div></div>
+ <div class="rule"><div class="k">8</div><div><b>Write down every trade</b> (date, call, size, result). This is how we check the plan is working.</div></div>
+ <div class="rule"><div class="k">9</div><div><b>Spending limit (you decide):</b>Suggested: no more than 20 evaluations ($2,100) before you stop and review, even if you feel close.</div></div>
+</div>
+
+<h2>How many micro contracts? (cheat sheet)</h2>
+<div class="card"><table>
+<tr><th>Profit level distance</th><th>Evaluation day (aim +$1,500)</th><th>Funded first $4,000 (aim +$2,000)</th><th>$150 days (aim +$150)</th></tr>
+<tr><td>10 points</td><td>40 (limit)</td><td>40 (limit)</td><td>8</td></tr>
+<tr><td>20 points</td><td>38</td><td>40 (limit)</td><td>4</td></tr>
+<tr><td>30 points</td><td>25</td><td>33</td><td>3</td></tr>
+<tr><td>50 points</td><td>15</td><td>20</td><td>2</td></tr>
+<tr><td>75 points</td><td>10</td><td>13</td><td>1</td></tr>
+</table><small>Rule of thumb: 750 divided by the points = micros for an evaluation day. 1,000 divided by the points for the funded first $4,000. 75 divided by the points for the $150 days. When the answer is above 40, use 40: the profit will be smaller, that is fine. 10 micros = 1 mini.</small></div>
+
+
+<h2>How many contracts? Type the distance</h2>
+<div class="card">
+ <div class="row2">
+  <div><label class="f">Which step are you on?</label><select id="ph"><option value="1500">Evaluation day (aim +$1,500)</option><option value="2000">Funded: first $4,000 (aim +$2,000)</option><option value="150">Funded: $150 small day (aim +$150)</option></select></div>
+  <div><label class="f">Distance to the profit level, in points (from the call)</label><input type="number" id="pts" value="30" min="1" step="0.25"></div>
+ </div>
+ <div class="out" id="out2"></div>
+ <p class="sub" style="margin-bottom:0" id="why2"></p>
+</div>
+
+<h2>Before every trade: tick the boxes</h2>
+<div class="card" id="chk"></div>
+<h2>30-day practice run: track it here</h2>
+<div class="card">
+ <div class="row2">
+  <div><label class="f">How did the trade end?</label><select id="kind"><option value="tp">Reached the profit level</option><option value="sl">Hit the stop</option><option value="tw">Closed by the time limit, in profit</option><option value="tl">Closed by the time limit, at a loss</option></select></div>
+  <div><label class="f">Result in dollars (use a minus for a loss)</label><input type="number" id="amt" placeholder="e.g. 1500 or -2000" step="1"></div>
+ </div>
+ <p><button id="add">Add this trade</button> <button class="alt" id="undo">Undo last</button> <button class="alt" id="reset">Clear everything</button></p>
+ <div id="trk"></div>
+ <small>Saved only in this browser on this device. Nothing is sent anywhere.</small>
+</div>
+
+<h2>What we tested (and why you can trust it - a little)</h2>
+<div class="card">
+ <p style="margin-top:0">We took about <b>6,000 real past calls</b> (October 2023 to October 2026) and replayed each one on minute-by-minute prices, with realistic costs. For every setup we also ran a "coin-flip" version that picks buy or sell at random. The difference shows how much the calls really help.</p>
+ <h3>Did the calls beat a coin flip? (extra target hits, second price level)</h3>
+ <table>
+  <tr><td style="width:34%">Oct 2023 to Oct 2024</td><td><div class="bar"><i style="width:8%;background:var(--r)"></i></div></td><td style="width:20%"><b class="r">no help (-2)</b></td></tr>
+  <tr><td>Oct 2024 to Oct 2025</td><td><div class="bar"><i style="width:68%;background:var(--g)"></i></div></td><td><b class="g">strong (+7)</b></td></tr>
+  <tr><td>Oct 2025 to Oct 2026</td><td><div class="bar"><i style="width:23%;background:var(--g)"></i></div></td><td><b class="g">small (+2)</b></td></tr>
+ </table>
+ <p class="sub" style="margin-bottom:0">Points = extra trades out of 100 that reach the profit level before the stop. We focus on <b>2024 to today</b> (the recent market). The help is real but small and uneven, which is why this stays a practice plan first.</p>
+</div>
+
+<h2>What can go wrong</h2>
+<div class="grid g2">
+ <div class="card"><b>The edge fades.</b> Part of 2024 showed no help from the calls. It may do so again.</div>
+ <div class="card"><b>It has never been traded live.</b> All results are replays and computer estimates of Lucid's rules as published on their help pages.</div>
+ <div class="card"><b>Lots of tries fail.</b> About 7 in 10 evaluations fail. Plan your budget before you start.</div>
+ <div class="card"><b>The vendor's own numbers are not audited.</b> Their 80% win rate does not mean 80% profit, we measured the real thing ourselves.</div>
+</div>
+
+<h2>Dates and checkpoints</h2>
+<div class="card"><div class="tl">
+ <div class="it"><b>8 Oct 2026 - Plan v1 written.</b> Research finished for MNQ. Second asset (MGC gold) test started the same day.</div>
+ <div class="it f"><b>9 Oct to 8 Nov 2026 - 30-day practice run (no money).</b> Follow the rules on a practice account. Goal: at least 150 practice trades.</div>
+ <div class="it f"><b>8 Nov 2026 - Review.</b> Go only if: target hit before stop in at least 57 of every 100 trades, total profit after costs above zero, and you followed every rule. Otherwise stop or adjust.</div>
+ <div class="it f"><b>After review - YOUR decision.</b> Buy ONE evaluation. Nothing is bought or traded without your say-so.</div>
+</div></div>
+
+<h2>Numbers to watch every week</h2>
+<div class="grid g3">
+ <div class="card"><div class="lab">Trades that reached the profit level first</div><div class="big">57+ of 100</div><small>below 55 for 150 trades = pause</small></div>
+ <div class="card"><div class="lab">Rule breaks</div><div class="big g">0</div><small>any break means pause and review</small></div>
+ <div class="card"><div class="lab">Total spent on fees vs your limit</div><div class="big">$2,100 max</div><small>suggested limit, you decide</small></div>
+</div>
+
+<h2>What was done (change log)</h2>
+<div class="card"><table>
+<tr><td>8 Oct</td><td>Studied both websites, free 20-year record, the app and the independent review.</td></tr>
+<tr><td>8 Oct</td><td>Found the vendor's "hit" does not mean profit; measured real profit instead.</td></tr>
+<tr><td>8 Oct</td><td>Replayed 3 years of NQ calls on 1-minute prices, with a coin-flip control. Fixed two of my own mistakes (peeking at the outcome; wrong cost).</td></tr>
+<tr><td>8 Oct</td><td>Chose this plan: second price level, stop 1.33x, sized to the dollar goal, first level for the $150 days.</td></tr>
+<tr><td>8 Oct</td><td>Started the same test on gold (MGC) as a second asset.</td></tr>
+</table></div>
+
+<p class="note" style="margin-top:20px">This is research and planning, not financial advice. Results come from replays and computer estimates; real trading can lose money. Firm rules were taken from their public help pages on 26-28 Aug 2026 and can change. Nothing here places a trade or buys anything.</p>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);const fm=v=>(v<0?"-":"")+"$"+Math.abs(Math.round(v)).toLocaleString();
+const SC={calls:{pass:.299,fp:.086,avg:1209},none:{pass:.244,fp:.056,avg:965}};
+function calc(){
+ const n=+$("n").value,fee=+$("fee").value||0,mon=+$("mon").value||0,sc=SC[$("sc").value];$("nv").textContent=n;
+ const spend=n*fee+mon*100,passes=n*sc.pass,pays=n*sc.fp,back=n*sc.pass*sc.avg,net=back-spend,atleast=1-Math.pow(1-sc.fp,n);
+ $("out1").innerHTML=`<div>Money you spend<b class="r">${fm(spend)}</b></div><div>Evaluations passed (average)<b>${passes.toFixed(1)}</b></div><div>First payouts (average)<b class="g">${pays.toFixed(1)}</b></div><div>Money back (average)<b class="g">${fm(back)}</b></div><div>Average result<b class="${net>=0?'g':'r'}">${fm(net)}</b></div><div>Chance of at least ONE payout<b>${Math.round(atleast*100)}%</b></div>`;
+ $("why1").textContent=`These are averages. In real life it swings a lot: with ${n} tries there is about a ${Math.round((1-atleast)*100)}% chance of NO payout at all, and the money spent is gone. Funded accounts pay an average of ${fm(sc.avg)} each.`;
+}
+function size(){
+ const goal=+$("ph").value,p=+$("pts").value;if(!(p>0)){$("out2").innerHTML="";return}
+ const need=Math.ceil(goal/(2*p)),m=Math.max(1,Math.min(40,need)),profit=m*2*p;let stopPts,loss;
+ if(goal===150){stopPts=2000/(m*2);loss=2000}else{stopPts=(4/3)*p;loss=m*2*stopPts}
+ $("out2").innerHTML=`<div>Micro contracts to use<b class="b">${m}</b><small>${(m/10).toFixed(1)} minis</small></div><div>If the profit level is reached<b class="g">${fm(profit)}</b></div><div>Stop distance<b>${stopPts.toFixed(1)} points</b></div><div>If the stop is hit<b class="r">${fm(-Math.min(2000,loss))}</b><small>${goal===150?"you survive":"uses the whole $2,000 allowance: this account ends"}</small></div>`;
+ $("why2").textContent=need>40?"The limit is 40 micros (4 minis), so the profit will be smaller than your aim. That is fine: just take the trade at 40.":(goal===150?"The stop is set so the most you can lose on this small day is about $2,000.":"The stop sits 1.33 times as far away as the profit level.");
+}
+["n","fee","mon","sc"].forEach(i=>$(i).addEventListener("input",calc));["ph","pts"].forEach(i=>$(i).addEventListener("input",size));calc();size();
+const items=["Only ONE evaluation / ONE funded account is open right now","This call is on NQ and lasts 15 to 150 minutes","I have no trade open (I am flat)","I will use the call's direction, nothing else","Profit level = 2nd level (evaluation, first $4,000) or 1st level ($150 days)","Stop is on the other side, 1.33 times as far (or $2,000 risk on $150 days)","Contracts checked with the table, never above 40 micros","Profit level AND stop are entered together, and I will not move them","I am not copying this call to any other account"];
+let ck={};try{ck=JSON.parse(localStorage.getItem("mnq_ck")||"{}")}catch(e){}
+function drawck(){const el=$("chk");el.innerHTML=items.map((t,i)=>`<label class="chk"><input type="checkbox" data-i="${i}" ${ck[i]?"checked":""}><span>${t}</span></label>`).join("")+`<p><span class="status ${Object.values(ck).filter(Boolean).length===items.length?'st-ok':'st-no'}" id="cs"></span> <button class="alt" id="cr">Untick all</button></p>`;
+ const all=Object.values(ck).filter(Boolean).length===items.length;$("cs").textContent=all?"All ticked: OK to place the trade":"Not ready: "+(items.length-Object.values(ck).filter(Boolean).length)+" box(es) left";
+ el.querySelectorAll("input").forEach(c=>c.addEventListener("change",()=>{ck[c.dataset.i]=c.checked;try{localStorage.setItem("mnq_ck",JSON.stringify(ck))}catch(e){}drawck()}));$("cr").addEventListener("click",()=>{ck={};try{localStorage.removeItem("mnq_ck")}catch(e){}drawck()})}
+drawck();
+let tr=[];try{tr=JSON.parse(localStorage.getItem("mnq_tr")||"[]")}catch(e){}
+function save(){try{localStorage.setItem("mnq_tr",JSON.stringify(tr))}catch(e){}}
+function drawtr(){
+ const n=tr.length,tp=tr.filter(t=>t.k==="tp").length,sl=tr.filter(t=>t.k==="sl").length,net=tr.reduce((a,t)=>a+t.a,0),dec=tp+sl,pct=dec?100*tp/dec:0;
+ let st,cls;if(n<150){st=`Keep going: ${150-n} more practice trades needed`;cls="st-no"}else if(pct>=57&&net>0){st="GO: you can decide on ONE evaluation (your decision)";cls="st-ok"}else if(pct<55){st="PAUSE: results are below plan, review before spending";cls="st-bad"}else{st="NOT YET: results are close but not good enough";cls="st-warn"}
+ $("trk").innerHTML=`<div class="prog"><i style="width:${Math.min(100,n/1.5)}%"></i></div><div class="out"><div>Trades logged<b>${n} of 150</b></div><div>Reached profit level first<b>${dec?pct.toFixed(0)+"%":"-"}</b><small>need 57% or more</small></div><div>Total result<b class="${net>=0?'g':'r'}">${fm(net)}</b></div><div>Profit level / stop<b>${tp} / ${sl}</b></div></div><p><span class="status ${cls}">${st}</span></p>`}
+$("add").addEventListener("click",()=>{const a=parseFloat($("amt").value);if(isNaN(a)){$("amt").focus();return}const k=$("kind").value;tr.push({k,a:(k==="sl"||k==="tl")?-Math.abs(a):(k==="tp"||k==="tw"?Math.abs(a):a),t:Date.now()});$("amt").value="";save();drawtr()});
+$("undo").addEventListener("click",()=>{tr.pop();save();drawtr()});
+$("reset").addEventListener("click",()=>{if(confirm("Clear all logged trades and ticks?")){tr=[];ck={};try{localStorage.removeItem("mnq_tr");localStorage.removeItem("mnq_ck")}catch(e){}drawtr();drawck()}});
+drawtr();
+})();
+</script>
+<script>
+const d=document.getElementById('dots');
+for(let i=0;i<100;i++){const e=document.createElement('div');e.className='dot'+(i>=91?' w':i>=70?' p':'');d.appendChild(e);}
+</script></body></html>
