@@ -316,7 +316,8 @@
           }
         });
         sections.forEach((el) => { el.hidden = !matches.has(el); });
-        const results = [...matches].filter((el) => ![...matches].some((other) => other !== el && el.contains(other)));
+        const matchedElements = [...matches];
+        const results = matchedElements.filter((el) => !matchedElements.some((other) => other !== el && el.contains(other)));
         noResults.style.display = results.length ? 'none' : 'block';
         status.textContent = query ? `${results.length} matching step${results.length === 1 ? '' : 's'} or answer${results.length === 1 ? '' : 's'}.` : 'Search the steps and quick answers below.';
       };
@@ -327,6 +328,13 @@
         filter();
       }));
       search.addEventListener('input', filter);
+      document.querySelectorAll('a[href^="#"]').forEach((link) => link.addEventListener('click', () => {
+        const target = link.getAttribute('href').slice(1);
+        currentView = target === 'backtest' || target === 'indicator' ? target : 'all';
+        search.value = '';
+        viewButtons.forEach((item) => item.setAttribute('aria-pressed', String(item.dataset.view === currentView)));
+        filter();
+      }));
 
       const checks = [...document.querySelectorAll('[data-check]')];
       checks.forEach((box) => {
