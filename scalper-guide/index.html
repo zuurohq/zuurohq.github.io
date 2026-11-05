@@ -232,7 +232,7 @@
         <article class="step-card searchable" data-guide="backtest" data-search="strategy tester date range 7 day 30 day 90 day 365 day 3 year deep backtesting update report">
           <span class="step-number">03</span><div class="step-content"><h3>Choose the dates</h3><p>Open <strong>Strategy Tester</strong> below the chart. Start with a short check, then repeat with 30, 90, and 365 days. If your plan offers Deep Backtesting, use it for longer history.</p><p>If TradingView marks the report as out of date, click <strong>Update report</strong>.</p><label class="check-row"><input type="checkbox" data-check="b3"> I have chosen and updated a date range</label></div>
         </article>
-        <article class="step-card searchable" data-guide="backtest" data-search="overview trade list net profit profit factor drawdown losing trade report evaluate">
+        <article class="step-card searchable" data-guide="backtest" data-search="overview trade list net profit profit factor drawdown losing trade report evaluate performance">
           <span class="step-number">04</span><div class="step-content"><h3>Read the report, not just one number</h3><p>Check net profit, number of trades, profit factor, and largest drawdown. Open the trade list and look at losing trades too.</p><p>Repeat the same settings over other dates before deciding what to keep.</p><label class="check-row"><input type="checkbox" data-check="b4"> I have checked the trades and risk</label></div>
         </article>
       </div>
@@ -298,6 +298,7 @@
       const status = document.querySelector('#search-status');
       const noResults = document.querySelector('#no-results');
       const sections = [...document.querySelectorAll('.searchable')];
+      const resultCards = [...document.querySelectorAll('.quick-card.searchable, .step-card.searchable, .faq-item.searchable')];
       const viewButtons = [...document.querySelectorAll('[data-view]')];
       let currentView = 'all';
 
@@ -306,8 +307,10 @@
       const filter = () => {
         const query = search.value.trim().toLowerCase();
         const matches = new Set();
-        sections.forEach((el) => {
+        const results = [];
+        resultCards.forEach((el) => {
           if (!matchesView(el) || !matchesSearch(el, query)) return;
+          results.push(el);
           matches.add(el);
           let parent = el.parentElement?.closest('.searchable');
           while (parent) {
@@ -316,8 +319,6 @@
           }
         });
         sections.forEach((el) => { el.hidden = !matches.has(el); });
-        const matchedElements = [...matches];
-        const results = matchedElements.filter((el) => !matchedElements.some((other) => other !== el && el.contains(other)));
         noResults.style.display = results.length ? 'none' : 'block';
         status.textContent = query ? `${results.length} matching step${results.length === 1 ? '' : 's'} or answer${results.length === 1 ? '' : 's'}.` : 'Search the steps and quick answers below.';
       };
