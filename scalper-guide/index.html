@@ -67,6 +67,7 @@
     .toolbar { display: grid; grid-template-columns: minmax(200px, 1fr) auto; align-items: end; gap: 16px; margin: 25px 0 16px; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: rgba(22,36,58,.84); }
     .search-wrap label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
     .search-box { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 13px; border: 1px solid var(--line); border-radius: 12px; background: #0f1b2d; }
+    .search-box:focus-within { outline: 3px solid var(--amber); outline-offset: 3px; }
     .search-box span { color: var(--mint); font-weight: 900; }
     .search-box input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); }
     .search-box input::placeholder { color: #7f90aa; }
@@ -304,14 +305,20 @@
       const matchesSearch = (el, query) => !query || ((el.dataset.search || '') + ' ' + el.textContent).toLowerCase().includes(query);
       const filter = () => {
         const query = search.value.trim().toLowerCase();
-        let shown = 0;
+        const matches = new Set();
         sections.forEach((el) => {
-          const visible = matchesView(el) && matchesSearch(el, query);
-          el.hidden = !visible;
-          if (visible) shown += 1;
+          if (!matchesView(el) || !matchesSearch(el, query)) return;
+          matches.add(el);
+          let parent = el.parentElement?.closest('.searchable');
+          while (parent) {
+            if (matchesView(parent)) matches.add(parent);
+            parent = parent.parentElement?.closest('.searchable');
+          }
         });
-        noResults.style.display = shown ? 'none' : 'block';
-        status.textContent = query ? `${shown} guide section${shown === 1 ? '' : 's'} found.` : 'Search the steps and quick answers below.';
+        sections.forEach((el) => { el.hidden = !matches.has(el); });
+        const results = [...matches].filter((el) => ![...matches].some((other) => other !== el && el.contains(other)));
+        noResults.style.display = results.length ? 'none' : 'block';
+        status.textContent = query ? `${results.length} matching step${results.length === 1 ? '' : 's'} or answer${results.length === 1 ? '' : 's'}.` : 'Search the steps and quick answers below.';
       };
 
       viewButtons.forEach((button) => button.addEventListener('click', () => {
