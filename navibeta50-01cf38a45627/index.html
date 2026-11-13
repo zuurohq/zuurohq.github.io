@@ -79,6 +79,8 @@ nav.top .wrap{display:flex;align-items:center;gap:16px;height:56px}
 .m{min-width:20px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;background:none;border:0;padding:0;cursor:pointer;color:var(--ink);font:inherit;position:relative}
 .m .b{width:100%;border-radius:6px 6px 2px 2px;background:var(--accent);min-height:3px}
 .m.neg .b{background:var(--bad)}
+.m.sm .b{background:repeating-linear-gradient(45deg,var(--warn),var(--warn) 4px,var(--warn-soft) 4px,var(--warn-soft) 8px)}
+.m.none .b{background:none;border:2px dashed var(--line);height:12%!important}
 .m[aria-pressed="true"] .b{outline:2px solid var(--ink);outline-offset:1px}
 .mlab{display:grid;grid-template-columns:repeat(13,1fr);gap:6px;margin-top:8px;font:.7rem var(--mono);color:var(--ink3);text-align:center}
 .mread{margin-top:16px;padding:14px 18px;border-radius:12px;background:var(--sunken);font-size:.95rem;min-height:3.4em}
@@ -149,11 +151,11 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.82rem}
 
 <section id="rate"><div class="wrap reveal">
 <div class="sec-head"><span class="eyebrow">01 &middot; Pass rate</span><h2>How often it passed</h2><p>Tap a row to switch the whole page. D = days. The line is the likely range.</p></div>
-<div class="card"><div class="bars" id="bars"></div><p class="cap">Striped bars have under 30 finished Evals. Treat them as a hint only. Range = 95% confidence.</p></div>
+<div class="card"><div class="bars" id="bars"></div><p class="cap">Striped bars have under 50 finished Evals. Treat them as a hint only. Range = 95% confidence.</p></div>
 </div></section>
 
 <section id="months"><div class="wrap reveal">
-<div class="sec-head"><span class="eyebrow">02 &middot; Month by month</span><h2>Steady, or lumpy?</h2><p>Last 13 months. Tap a bar for the numbers.</p></div>
+<div class="sec-head"><span class="eyebrow">02 &middot; Month by month</span><h2>Steady, or lumpy?</h2><p>Last 13 months. Striped = under 5 Evals, weak evidence.</p></div>
 <div class="card">
 <div class="seg" role="group" aria-label="Chart type"><button id="mPass" aria-pressed="true">Pass rate</button><button id="mNet" aria-pressed="false">Trading result</button></div>
 <div class="months" id="mbars"></div><div class="mlab" id="mlab"></div>
@@ -191,8 +193,8 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.82rem}
 <li>No single day above <b>$1,500</b> (50% consistency).</li>
 <li>One step per day. Flat by 4:15 pm New York.</li></ul></div></details>
 <details><summary>What to be careful about</summary><div class="in"><ul>
-<li>The latest year looks better than the two before it. Back-tests do not promise that continues.</li>
-<li>Months swing a lot. Evals fail in clusters, so buying many at once adds less safety than it looks.</li>
+<li>The latest year looks better than the two before it, but the gap may be luck. A back-test does not promise it continues.</li>
+<li>Months swing a lot and hold few Evals each. Evals fail in clusters, so buying many at once adds less safety than it looks.</li>
 <li>Whole history, including years older than these 3: 20% passed (282 of 1,433), profit factor about 1.0.</li>
 <li>Fills use back-test prices. Real slippage can be worse.</li></ul></div></details>
 <details><summary>How these numbers are counted</summary><div class="in"><ul>
@@ -211,8 +213,10 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 function wilson(k,n){if(!n)return[0,0];const z=1.96,p=k/n,d=1+z*z/n,c=p+z*z/(2*n),a=z*Math.sqrt(p*(1-p)/n+z*z/(4*n*n));return[Math.max(0,(c-a)/d),Math.min(1,(c+a)/d)]}
 const pc=x=>Math.round(x*100)+'%';
 const money=x=>(x<0?'-':'')+'$'+Math.abs(Math.round(x)).toLocaleString('en-US');
+const FEW=10,SMALL=50;
+const ALLW=D.windows.find(w=>w.window==='All');
 const W=D.windows.filter(w=>w.window!=='All');
-let cur='365D',mmode='pass',par=false,selM=D.months.length-1;
+let cur='365D',mmode='pass',par=false,selM=(()=>{let k=D.months.length-1;while(k>0&&D.months[k].resolved<1)k--;return k})();
 const cw=()=>W.find(w=>w.window===cur);
 function keep(f){const a=document.activeElement,k=a&&(a.dataset.w?'[data-w="'+a.dataset.w+'"]':a.dataset.i?'[data-i="'+a.dataset.i+'"]':null),p=a&&a.parentElement&&a.parentElement.id;f();if(k&&p){const n=document.querySelector('#'+p+' '+k);if(n)n.focus({preventScroll:true})}}
 function sel(w){keep(()=>{cur=w;render()})}
@@ -220,38 +224,38 @@ function sel(w){keep(()=>{cur=w;render()})}
 function renderHero(){
  $('#pills').innerHTML=W.map(w=>`<button class="pill" aria-pressed="${w.window===cur}" data-w="${w.window}">${w.window}</button>`).join('');
  $('#pills').querySelectorAll('button').forEach(b=>b.onclick=()=>sel(b.dataset.w));
- const w=cw(),[lo,hi]=wilson(w.passed,w.resolved),small=w.resolved<30,few=w.resolved<5,fee=+$('#fee').value||0;
+ const w=cw(),[lo,hi]=wilson(w.passed,w.resolved),small=w.resolved<SMALL,few=w.resolved<FEW,fee=+$('#fee').value||0;
  const C=2*Math.PI*30,off=few?C:C*(1-w.rate);
  $('#kpis').innerHTML=`
  <div class="card kpi ring"><span class="lab">Pass rate</span>
   <svg width="84" height="84" viewBox="0 0 84 84" role="img" aria-label="Pass rate ${few?'not rated, too few Evals':pc(w.rate)}"><circle cx="42" cy="42" r="30" fill="none" stroke="var(--line)" stroke-width="9"/><circle cx="42" cy="42" r="30" fill="none" stroke="${small?'var(--warn)':'var(--accent)'}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C}" stroke-dashoffset="${off}" transform="rotate(-90 42 42)"/><text x="42" y="48" text-anchor="middle" font-family="var(--sans)" font-weight="700" font-size="19" fill="var(--ink)">${few?'n/a':pc(w.rate)}</text></svg>
   <span class="sub">${w.passed} of ${w.resolved} Evals</span></div>
- <div class="card kpi"><span class="lab">Typical days to pass</span><span class="big">${w.med_days_pass}</span><span class="sub">median, passed Evals</span></div>
+ <div class="card kpi"><span class="lab">Typical days to pass</span><span class="big">${w.passed<5?'n/a':w.med_days_pass}</span><span class="sub">${w.passed<5?'needs 5+ passes':'median, passed Evals'}</span></div>
  <div class="card kpi"><span class="lab">Profit factor (wins / losses)</span><span class="big">${w.pf==null?'n/a':w.pf.toFixed(2)}</span><span class="sub">${w.pf==null?'too few losses':'above 1 = made money'}</span></div>
- <div class="card kpi"><span class="lab">Cost per pass</span><span class="big">${w.passed&&!few? money(fee/w.rate):'n/a'}</span><span class="sub">at $${fee.toFixed(2)} per Eval</span></div>`;
- $('#winnote').innerHTML=few?`<span class="badge">Too few to rate</span> Only ${w.resolved} finished Eval in ${w.window}. Pick 90D or longer for a fair read.`:small?`<span class="badge">Small sample</span> Only ${w.resolved} finished Evals in ${w.window}. Likely range ${pc(lo)} to ${pc(hi)}.`:`<span class="badge ok">Likely range ${pc(lo)} to ${pc(hi)}</span> from ${w.resolved} finished Evals.`;
+ <div class="card kpi"><span class="lab">Cost per pass</span><span class="big">${w.passed&&!few? money(fee/w.rate):'n/a'}</span><span class="sub">${w.passed&&!few&&lo>0?'range '+money(fee/hi)+' to '+money(fee/lo):'at $'+fee.toFixed(2)+' per Eval'}</span></div>`;
+ $('#winnote').innerHTML=few?`<span class="badge">Too few to rate</span> Only ${w.resolved} finished Eval${w.resolved==1?'':'s'} in ${w.window}. Pick a longer window for a fair read.`:small?`<span class="badge">Small sample</span> Only ${w.resolved} finished Evals in ${w.window}. Likely range ${pc(lo)} to ${pc(hi)}. All history: ${pc(ALLW.rate)} (${ALLW.passed} of ${ALLW.resolved}).`:`<span class="badge">Likely range ${pc(lo)} to ${pc(hi)}</span> from ${w.resolved} finished Evals. All history: ${pc(ALLW.rate)} (${ALLW.passed} of ${ALLW.resolved}).`;
 }
 function renderBars(){
- $('#bars').innerHTML=W.map(w=>{const[lo,hi]=wilson(w.passed,w.resolved),sm=w.resolved<30;
- return `<button class="bar${sm?' small':''}" aria-pressed="${w.window===cur}" data-w="${w.window}" aria-label="${w.window}: ${w.resolved<5?'too few to rate,':pc(w.rate)+' passed,'} ${w.passed} of ${w.resolved}, range ${pc(lo)} to ${pc(hi)}"><span class="nm">${w.window}</span><span class="track">${w.resolved<5?'':`<span class="fill" style="width:${w.rate*100}%"></span><span class="rng" style="left:${lo*100}%;width:${(hi-lo)*100}%"></span>`}</span><span class="val">${w.resolved<5?'n/a':pc(w.rate)}<i>${w.resolved<5?'too few':w.passed+'/'+w.resolved}</i></span></button>`}).join('');
+ $('#bars').innerHTML=W.map(w=>{const[lo,hi]=wilson(w.passed,w.resolved),sm=w.resolved<SMALL;
+ return `<button class="bar${sm?' small':''}" aria-pressed="${w.window===cur}" data-w="${w.window}" aria-label="${w.window}: ${w.resolved<FEW?'too few to rate,':pc(w.rate)+' passed,'} ${w.passed} of ${w.resolved}, range ${pc(lo)} to ${pc(hi)}"><span class="nm">${w.window}</span><span class="track">${w.resolved<FEW?'':`<span class="fill" style="width:${w.rate*100}%"></span><span class="rng" style="left:${lo*100}%;width:${(hi-lo)*100}%"></span>`}</span><span class="val">${w.resolved<FEW?'n/a':pc(w.rate)}<i>${w.resolved<FEW?'too few':w.passed+'/'+w.resolved}</i></span></button>`}).join('');
  $('#bars').querySelectorAll('button').forEach(b=>b.onclick=()=>sel(b.dataset.w));
 }
 const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function renderMonths(){
  const M=D.months,max=mmode==='pass'?1:Math.max(...M.map(m=>Math.abs(m.net)));
  $('#mbars').innerHTML=M.map((m,i)=>{const v=mmode==='pass'?m.rate:Math.abs(m.net)/max,neg=mmode==='net'&&m.net<0;
- return `<button class="m${neg?' neg':''}" aria-pressed="${i===selM}" data-i="${i}" aria-label="${MN[+m.month.slice(5)-1]} ${m.month.slice(0,4)}: ${m.passed} of ${m.resolved} passed, result ${money(m.net)}"><span class="b" style="height:${Math.max(2,v*100)}%"></span></button>`}).join('');
+ return `<button class="m${neg?' neg':''}${m.resolved<5?' sm':''}${m.resolved<1?' none':''}" aria-pressed="${i===selM}" data-i="${i}" aria-label="${MN[+m.month.slice(5)-1]} ${m.month.slice(0,4)}: ${m.passed} of ${m.resolved} passed, result ${money(m.net)}"><span class="b" style="height:${Math.max(2,v*100)}%"></span></button>`}).join('');
  $('#mlab').innerHTML=M.map(m=>`<span>${MN[+m.month.slice(5)-1].slice(0,1)}</span>`).join('');
  $('#mbars').querySelectorAll('button').forEach(b=>b.onclick=()=>{keep(()=>{selM=+b.dataset.i;renderMonths()})});
  const m=M[selM];
- $('#mread').innerHTML=`<b>${MN[+m.month.slice(5)-1]} ${m.month.slice(0,4)}</b>: ${m.passed} of ${m.resolved} Evals passed (${pc(m.rate)}). Trading result <b>${money(m.net)}</b>${m.month==='2026-11'?'. Part month, 13 Nov so far.':m.resolved<5?'. Very few Evals this month.':'.'}`;
+ $('#mread').innerHTML=`<b>${MN[+m.month.slice(5)-1]} ${m.month.slice(0,4)}</b>: ${m.passed} of ${m.resolved} Evals passed (${pc(m.rate)}). Trading result <b>${money(m.net)}</b>${m.month==='2026-11'?'. Part month, 13 Nov so far.':m.resolved<FEW?'. Very few Evals this month.':'.'}`;
  $('#mPass').setAttribute('aria-pressed',mmode==='pass');$('#mNet').setAttribute('aria-pressed',mmode==='net');
 }
 function binom(n,p){const a=[];let c=Math.pow(1-p,n);for(let k=0;k<=n;k++){a.push(c);c=c*(n-k)/(k+1)*(p/(1-p||1e-12))}return a}
 function renderCalc(){
  const n=+$('#n').value,fee=Math.max(0,+$('#fee').value||0),w=cw(),p=w.rate,[lo,hi]=wilson(w.passed,w.resolved);
  $('#nv').textContent=n;
- if(w.resolved<5){$('#out').innerHTML='<div class="o" style="grid-column:1/-1"><span>Not enough Evals</span><b>n/a</b><i>'+w.window+' has only '+w.resolved+' finished Eval. Pick 90D or longer.</i></div>';$('#dots').innerHTML='';$('#leg').textContent='';$('#calcnote').textContent='';$('#seq').setAttribute('aria-pressed',!par);$('#par').setAttribute('aria-pressed',par);return}
+ if(w.resolved<FEW){$('#out').innerHTML='<div class="o" style="grid-column:1/-1"><span>Not enough Evals</span><b>n/a</b><i>'+w.window+' has only '+w.resolved+' finished Eval'+(w.resolved==1?'':'s')+'. Pick a longer window.</i></div>';$('#dots').innerHTML='';$('#leg').textContent='';$('#calcnote').textContent='';$('#seq').setAttribute('aria-pressed',!par);$('#par').setAttribute('aria-pressed',par);return}
  $('#nv').textContent=n;
  let exp=n*p,rlo,rhi,any;
  if(par){rlo=0;rhi=n;any=p}
@@ -261,15 +265,15 @@ function renderCalc(){
  <div class="o"><span>Expected passes</span><b>${par?'0 or '+n:exp.toFixed(1)}</b><i>${par?'all or nothing':'typical '+rlo+' to '+rhi}</i></div>
  <div class="o"><span>Total fees</span><b>${money(cost)}</b><i>${n} x $${fee.toFixed(2)}</i></div>
  <div class="o"><span>Cost per pass</span><b>${cpp==null?'n/a':money(cpp)}</b><i>fee / pass rate</i></div>
- <div class="o"><span>Chance of 1+ pass</span><b>${par?'about '+pc(any):'up to '+pc(any)}</b><i>${par?'one shared outcome':'cautious, ignores clustering'}</i></div>`;
+ <div class="o"><span>Chance of 1+ pass</span><b>${par?'about '+pc(any):'at least ~'+pc(any)}</b><i>${par?'one shared outcome':'low-end guess, ignores clustering'}</i></div>`;
  const e=Math.round(exp);
  $('#dots').innerHTML=Array.from({length:n},(_,i)=>`<s class="${par?'h':i<e?'p':''}"></s>`).join('');
  $('#leg').textContent=par?'All at once: they tend to win or lose together. Faded squares = all pass or none do.':`Green = expected passes (${e} of ${n}). Based on ${w.window}: ${pc(p)}, range ${pc(lo)} to ${pc(hi)}.`;
- $('#calcnote').textContent=w.resolved<30?`Warning: ${w.window} has only ${w.resolved} finished Evals. Try 170D or 365D for a steadier guess.`:'Failures cluster: Feb 2026 had 0 passes from 9 Evals. Whole history (older too): 20% passed, 282 of 1,433.';
+ $('#calcnote').textContent=w.resolved<SMALL?`Warning: ${w.window} has only ${w.resolved} finished Evals. Try 170D or 365D for a steadier guess.`:'Evals fail in clusters, so many at once adds less safety than it looks. Small samples: treat every number as a rough guide.';
  $('#seq').setAttribute('aria-pressed',!par);$('#par').setAttribute('aria-pressed',par);
 }
 function renderYears(){
- $('#yrs').innerHTML=D.years.map((y,i)=>`<div class="card yr"><div class="t">${['Latest year','Year before','Two years before'][i]}</div><div class="d">${esc(y.from)} to ${esc(y.to)}</div><div class="big">${pc(y.rate)}</div><div class="ln"><span>Passed</span><b>${y.passed} of ${y.resolved}</b></div><div class="ln"><span>Profit factor</span><b>${y.pf.toFixed(2)}</b></div><div class="ln"><span>Days to pass</span><b>${y.med_days_pass}</b></div></div>`).join('');
+ $('#yrs').innerHTML=D.years.map((y,i)=>`<div class="card yr"><div class="t">${['Latest year','Year before','Two years before'][i]}</div><div class="d">${esc(y.from)} to ${esc(y.to)}</div><div class="big">${pc(y.rate)}${y.pf<1?' <span class="badge" style="margin:0 0 0 6px">lost money</span>':''}</div><div class="ln"><span>Passed</span><b>${y.passed} of ${y.resolved}</b></div><div class="ln"><span>Profit factor</span><b>${y.pf.toFixed(2)}</b></div><div class="ln"><span>Days to pass</span><b>${y.med_days_pass}</b></div></div>`).join('');
 }
 function render(){renderHero();renderBars();renderCalc()}
 $('#n').oninput=renderCalc;$('#fee').oninput=()=>{renderHero();renderCalc()};
