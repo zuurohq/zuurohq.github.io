@@ -67,7 +67,7 @@ function renderKpis(){
   h+=kpi('Max drawdown',money(e.dd),'closed trades, net '+money(e.net));
   if(D.funded){
     var f=W(D.funded,cur), c=ch(cur);
-    h+=kpi('Eval to payout rate',c&&e.resolved?pct(c.leg1/e.resolved):'n/a',c?(c.leg1+' of '+e.resolved+' Eval attempts reached first payout in Funded'):'');
+    h+=kpi('Eval to payout rate',c&&e.resolved?pct(c.full/e.resolved):'n/a',c?(c.full+' of '+e.resolved+' Eval attempts went on to pass all 5 Funded legs (payout)'):'');
     h+=kpi('Funded stage pass rate',pct(f.rate),f.passed+' of '+f.resolved+' attempts, all 5 legs');
     h+=kpi('Funded profit factor',f2(f.pf),f.trades+' trades, net '+money(f.net));
     h+=kpi('Funded max drawdown',money(f.dd),'closed trades');
@@ -78,7 +78,7 @@ function renderKpis(){
   var rows='';
   wins.forEach(function(w){var x=W(D.eval,w),y=D.funded?W(D.funded,w):null,c=ch(w);
     rows+='<tr'+(w===cur?' class="sel"':'')+'><td>'+(w==='All'?'Entire history':w)+'</td><td>'+(x.rate==null?'n/a':pct(x.rate)+' <span class="cap">('+x.passed+'/'+x.resolved+')</span>')+'</td><td>'+(x.med_days_pass==null?'n/a':x.med_days_pass+' d')+'</td><td>'+f2(x.pf)+'</td><td>'+money(x.dd)+'</td><td class="'+(x.net<0?'bad':'')+'">'+money(x.net)+'</td>'
-    +(y?'<td>'+(y.rate==null?'n/a':pct(y.rate)+' <span class="cap">('+y.passed+'/'+y.resolved+')</span>')+'</td><td>'+(c&&x.resolved?pct(c.leg1/x.resolved)+' <span class="cap">('+c.leg1+'/'+x.resolved+')</span>':'n/a')+'</td><td>'+f2(y.pf)+'</td><td>'+money(y.dd)+'</td>':'')+'</tr>'});
+    +(y?'<td>'+(y.rate==null?'n/a':pct(y.rate)+' <span class="cap">('+y.passed+'/'+y.resolved+')</span>')+'</td><td>'+(c&&x.resolved?pct(c.full/x.resolved)+' <span class="cap">('+c.full+'/'+x.resolved+')</span>':'n/a')+'</td><td>'+f2(y.pf)+'</td><td>'+money(y.dd)+'</td>':'')+'</tr>'});
   $('cp-wbody').innerHTML=rows;
   document.querySelectorAll('#cp-pills button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.w===cur?'true':'false')});
 }
