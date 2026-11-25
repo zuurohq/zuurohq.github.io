@@ -1,0 +1,1420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAVI Trade Panel Visual User Guide | Zuuro HQ</title>
+<meta name="description" content="Interactive, visual, plain-English user guide for the NAVI Trade Panel on MetaTrader 5. Paper and demo accounts. Educational only.">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate, noai, noimageai">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="GPTBot" content="noindex, nofollow">
+<meta name="ClaudeBot" content="noindex, nofollow">
+<meta name="anthropic-ai" content="noindex, nofollow">
+<meta name="CCBot" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light dark">
+<script data-theme-boot>try{var t=localStorage.getItem("navi_theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230E0E10'/%3E%3Cpath d='M9 21l5-6 4 3 5-7' fill='none' stroke='%2334D399' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#FAFAF8;
+  --surface:#FFFFFF;
+  --sunken:#F3F2EE;
+  --ink:#0E0E10;
+  --ink2:#55555C;
+  --ink3:#6B6B73;
+  --line:#E8E6E1;
+  --accent:#0B7A5C;
+  --accent-ink:#FFFFFF;
+  --on-accent:#FFFFFF;
+  --accent-soft:#E6F4EE;
+  --warn:#9A5B00;
+  --warn-soft:#FBF1DC;
+  --bad:#B42318;
+  --bad-soft:#FCE8E6;
+  --sel-bg:#0E0E10;
+  --sel-ink:#FAFAF8;
+  --primary-hover:#26262B;
+  --edge-ok:#BFE3D4;
+  --edge-warn:#EBD6A6;
+  --edge-bad:#F2C4BF;
+  --sw-off:#C9C8C2;
+  --zero:#B8B7B0;
+  --radius:16px;
+  --shadow:0 1px 2px rgba(14,14,16,.04),0 8px 24px rgba(14,14,16,.06);
+  --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B0C0D;
+    --surface:#131517;
+    --sunken:#0F1113;
+    --ink:#F2F2F0;
+    --ink2:#A1A1A8;
+    --ink3:#85868E;
+    --line:#25272B;
+    --accent:#34D399;
+    --accent-ink:#04201A;
+    --on-accent:#04201A;
+    --accent-soft:#0F2A22;
+    --warn:#F5B84B;
+    --warn-soft:#2A2110;
+    --bad:#F97066;
+    --bad-soft:#2E1513;
+    --sel-bg:#F2F2F0;
+    --sel-ink:#0B0C0D;
+    --primary-hover:#FFFFFF;
+    --edge-ok:#1F5040;
+    --edge-warn:#5B4A22;
+    --edge-bad:#5C2B27;
+    --sw-off:#4A4B52;
+    --zero:#6A6B73;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B0C0D;
+  --surface:#131517;
+  --sunken:#0F1113;
+  --ink:#F2F2F0;
+  --ink2:#A1A1A8;
+  --ink3:#85868E;
+  --line:#25272B;
+  --accent:#34D399;
+  --accent-ink:#04201A;
+  --on-accent:#04201A;
+  --accent-soft:#0F2A22;
+  --warn:#F5B84B;
+  --warn-soft:#2A2110;
+  --bad:#F97066;
+  --bad-soft:#2E1513;
+  --sel-bg:#F2F2F0;
+  --sel-ink:#0B0C0D;
+  --primary-hover:#FFFFFF;
+  --edge-ok:#1F5040;
+  --edge-warn:#5B4A22;
+  --edge-bad:#5C2B27;
+  --sw-off:#4A4B52;
+  --zero:#6A6B73;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--sel-bg);color:var(--sel-ink);padding:10px 18px;border-radius:999px;z-index:120;font-weight:600;text-decoration:none}
+.skip:focus{left:12px}
+main:focus{outline:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.14;margin:0;font-weight:650;text-wrap:balance}
+h1{font-size:clamp(2.1rem,5.4vw,3.75rem);font-weight:700;letter-spacing:-.035em}
+h2{font-size:clamp(1.55rem,3.6vw,2.3rem)}
+h3{font-size:1.12rem;letter-spacing:-.01em}
+p{margin:0 0 1em;max-width:65ch}
+.eyebrow{font:600 .78rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:block}
+.lede{font-size:clamp(1.02rem,2vw,1.2rem);color:var(--ink2);max-width:660px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--ink2)}
+.faint{color:var(--ink3)}
+.small{font-size:.9rem}
+.pos{color:var(--accent)}
+.neg{color:var(--bad)}
+
+/* reading progress + sticky nav */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:80}
+nav.top{position:sticky;top:0;z-index:60;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;align-items:center;gap:12px;min-height:64px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.brand{font-weight:700;font-size:15px;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.brand:hover{text-decoration:none}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block;flex:none}
+.btag{font-weight:500;font-size:.75rem;color:var(--ink3);border:1px solid var(--line);border-radius:999px;padding:1px 8px;letter-spacing:0}
+.links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.links::-webkit-scrollbar{display:none}
+.links a{font-size:.86rem;color:var(--ink2);text-decoration:none;padding:6px 12px;border-radius:999px;white-space:nowrap;min-height:36px;display:inline-flex;align-items:center}
+.links a:hover{color:var(--ink);background:var(--sunken);text-decoration:none}
+.links a.on{background:var(--sel-bg);color:var(--sel-ink)}
+
+/* 3-way NAVI theme control */
+.themectl{display:inline-flex;border:1px solid var(--line);border-radius:999px;background:var(--surface);overflow:hidden;flex:none}
+.themectl button{font:inherit;font-size:.78rem;padding:6px 12px;min-height:36px;border:0;border-right:1px solid var(--line);background:var(--surface);color:var(--ink2);cursor:pointer;white-space:nowrap}
+.themectl button:last-child{border-right:0}
+.themectl button[aria-pressed="true"]{background:var(--sel-bg);color:var(--sel-ink);font-weight:600}
+.themectl button[aria-pressed="true"]:focus-visible{outline:2px solid var(--sel-ink);outline-offset:-4px}
+
+section{padding:76px 0;border-top:1px solid var(--line)}
+section.first{border-top:0}
+.sec-head{margin-bottom:28px;max-width:700px}
+
+/* hero */
+.hero{padding:72px 0 56px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:.85rem;color:var(--ink2);margin-bottom:22px;flex-wrap:wrap}
+.chip b{color:var(--warn)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{font:600 .95rem var(--sans);border-radius:999px;min-height:42px;padding:10px 20px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:transform .12s,background .12s}
+.btn:hover{transform:translateY(-1px);text-decoration:none;background:var(--sunken)}
+.btn.primary{background:var(--sel-bg);border-color:var(--sel-bg);color:var(--sel-ink)}
+.btn.primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}
+.btn.sm{min-height:36px;padding:7px 14px;font-size:.85rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:42px;box-shadow:var(--shadow)}
+.stats div{background:var(--surface);padding:20px}
+.stats b{display:block;font-size:1.45rem;font-weight:650;letter-spacing:-.025em}
+.stats span{color:var(--ink2);font-size:.9rem}
+
+/* cards & pills */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card .card{box-shadow:none}
+.callout{background:var(--accent-soft);border:1px solid var(--edge-ok);border-radius:12px;padding:12px 16px;font-size:.93rem;color:var(--ink);margin-top:14px}
+.callout.warn{background:var(--warn-soft);border-color:var(--edge-warn)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:1px solid var(--line);background:var(--surface);color:var(--ink2);border-radius:999px;padding:8px 16px;font:500 .9rem var(--sans);cursor:pointer;min-height:38px}
+.tab:hover{background:var(--sunken);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--sel-bg);color:var(--sel-ink);border-color:var(--sel-bg)}
+.tag{display:inline-block;font:600 .72rem var(--mono);padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--edge-ok);margin-right:6px;vertical-align:middle}
+.tag.sample{background:var(--warn-soft);color:var(--warn);border-color:var(--edge-warn)}
+.tag.rec{background:var(--sel-bg);color:var(--sel-ink);border-color:var(--sel-bg)}
+
+/* 01 visual 3-step quickstart */
+.step-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:24px;align-items:center}
+.svgbox{background:var(--sunken);border:1px solid var(--line);border-radius:14px;padding:14px;overflow:hidden}
+.svgbox svg{display:block;width:100%;height:auto}
+.step-pills{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.step-pill{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 14px;cursor:pointer;color:var(--ink);font:inherit}
+.step-pill:hover{background:var(--sunken)}
+.step-pill[aria-selected="true"]{background:var(--sel-bg);color:var(--sel-ink);border-color:var(--sel-bg)}
+.step-pill small{display:block;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;opacity:.75;margin-bottom:2px}
+.step-pill strong{display:block;font-size:.95rem}
+.step-list{margin:14px 0 0;padding-left:20px;color:var(--ink2)}
+.step-list li{margin-bottom:8px}
+
+/* 02 visual preset picker */
+.preset-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.pcard{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:var(--radius);padding:16px;cursor:pointer;color:var(--ink);font:inherit;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);transition:transform .12s}
+.pcard:hover{transform:translateY(-2px)}
+.pcard[aria-selected="true"]{background:var(--sel-bg);color:var(--sel-ink);border-color:var(--sel-bg)}
+.pcard .pbadge{display:inline-block;align-self:flex-start;font:600 .72rem var(--sans);padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--edge-ok)}
+.pcard[aria-selected="true"] .pbadge{background:rgba(255,255,255,.16);color:var(--sel-ink);border-color:rgba(255,255,255,.28)}
+.pcard p{margin:0;font-size:.86rem;opacity:.82}
+.meters{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.mrow-bar label{display:flex;justify-content:space-between;font-size:.82rem;color:var(--ink2);font-weight:600;margin-bottom:6px}
+.track{height:10px;background:var(--sunken);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--accent);border-radius:999px;transition:width .25s}
+.copyrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding:10px 14px;background:var(--sunken);border:1px solid var(--line);border-radius:12px}
+.copyrow code{font-family:var(--mono);font-size:.88rem;color:var(--ink);margin-right:auto;word-break:break-all}
+
+/* 03 interactive live chart + NAVI panel simulator */
+.sim-grid{display:grid;grid-template-columns:1.2fr minmax(290px,390px);gap:22px;align-items:start}
+.chart-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.chart-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.chart-top .sym{font-weight:700;font-size:.98rem;margin-right:auto;display:inline-flex;align-items:center;gap:8px}
+.price-pill{font:700 .95rem var(--mono);padding:4px 10px;border-radius:999px;background:var(--sunken);border:1px solid var(--line)}
+.chart-controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.toast{margin-top:10px;padding:10px 14px;border-radius:12px;font-size:.88rem;background:var(--sunken);border:1px solid var(--line);color:var(--ink2);min-height:42px;display:flex;align-items:center;gap:8px}
+.toast.ok{background:var(--accent-soft);border-color:var(--edge-ok);color:var(--accent);font-weight:600}
+
+.mt5mock{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow);font-size:13px}
+.mt5hdr{display:flex;align-items:center;gap:6px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:10px;flex-wrap:wrap}
+.mt5hdr .mbrand{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13px;margin-right:auto}
+.mbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 10px;font:600 12px var(--sans);cursor:pointer;min-height:36px;display:inline-flex;align-items:center;justify-content:center;gap:4px;transition:transform .1s,background .12s}
+.mbtn:hover{background:var(--sunken)}
+.mbtn.on,.mbtn.pri{background:var(--sel-bg);color:var(--sel-ink);border-color:var(--sel-bg)}
+.mbtn.buy{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.mbtn.buysoft{background:var(--accent-soft);color:var(--accent);border-color:var(--edge-ok)}
+.mbtn.sell{background:var(--bad);color:var(--on-accent);border-color:var(--bad)}
+.mbtn.sellsoft{background:var(--bad-soft);color:var(--bad);border-color:var(--edge-bad)}
+.mbtn.full{width:100%}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}
+.mrow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px}
+.mstat{background:var(--sunken);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font:600 12px var(--mono);text-align:center;margin-bottom:8px}
+.fixbar{margin-top:8px;padding:10px;border:1px solid var(--edge-ok);background:var(--accent-soft);border-radius:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.fixbar .fixinfo{font:600 12px var(--mono);color:var(--accent);margin-right:auto}
+.indrow{display:grid;grid-template-columns:86px 1fr 44px;gap:8px;align-items:center;margin-bottom:6px;font-size:12px}
+.gbar{height:10px;background:var(--sunken);border:1px solid var(--line);border-radius:999px;position:relative;overflow:hidden}
+.gbar .gmid{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--zero)}
+.gbar .gfill{position:absolute;top:1px;bottom:1px;border-radius:999px}
+
+/* 04 24-hour clock visual */
+.clock-strip{display:grid;grid-template-columns:repeat(12,1fr);gap:5px;margin:14px 0}
+.hr-cell{border:1px solid var(--edge-ok);background:var(--accent-soft);color:var(--accent);border-radius:10px;padding:8px 4px;text-align:center;font:600 .78rem var(--mono)}
+.hr-cell.blk{border-color:var(--edge-bad);background:var(--bad-soft);color:var(--bad)}
+.hr-cell span{display:block;font-size:.66rem;font-family:var(--sans);font-weight:500;opacity:.9}
+
+/* 05 safety guard switchboard */
+.guard-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start}
+.gitem{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.gitem strong{display:block;font-size:.96rem}
+.gitem span{display:block;font-size:.86rem;color:var(--ink2)}
+.sw{position:relative;width:50px;height:30px;border-radius:999px;border:1px solid var(--line);background:var(--sw-off);cursor:pointer;flex:none;padding:0;transition:background .18s}
+.sw:after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.22);transition:transform .18s}
+.sw[aria-checked="true"]{background:var(--accent);border-color:var(--accent)}
+.sw[aria-checked="true"]:after{transform:translateX(20px)}
+.shield-ring{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.ring-svg{width:92px;height:92px;flex:none}
+
+/* 06 visual slider planner */
+.sliders{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.sbox{background:var(--sunken);border:1px solid var(--line);border-radius:14px;padding:14px}
+.sbox label{display:flex;justify-content:space-between;font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:8px}
+.sbox label b{font-family:var(--mono);color:var(--accent)}
+.sbox input[type="range"]{width:100%;accent-color:var(--accent);cursor:pointer;height:28px}
+.out{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:14px}
+.out div{background:var(--surface);padding:14px}
+.out b{display:block;font:650 1.18rem var(--mono);letter-spacing:-.02em}
+.out span{font-size:.74rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.bars-wrap{margin-top:16px;background:var(--sunken);border:1px solid var(--line);border-radius:12px;padding:14px}
+
+/* 07 quiz, checklist, glossary */
+.qbox{background:var(--sunken);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+.ans{display:flex;gap:8px;flex-wrap:wrap}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:.92rem}
+.fb.ok{background:var(--accent-soft);color:var(--accent);border:1px solid var(--edge-ok)}
+.fb.no{background:var(--bad-soft);color:var(--bad);border:1px solid var(--edge-bad)}
+.check{display:grid;gap:10px;margin-top:12px}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;min-height:44px}
+.check label.done{background:var(--accent-soft);border-color:var(--edge-ok)}
+.check label.done .cktitle{text-decoration:line-through}
+.check input{margin-top:3px;accent-color:var(--accent);width:20px;height:20px;flex:none}
+.cktitle{display:block;font-weight:600;color:var(--ink)}
+.ckhelp{display:block;font-size:.88rem;color:var(--ink2)}
+.meter{height:6px;background:var(--sunken);border-radius:999px;overflow:hidden;margin:14px 0 6px;border:1px solid var(--line)}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+
+.gl-search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:500 1rem var(--sans);margin-bottom:16px;min-height:44px}
+.gl{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gl div{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.gl b{display:block;font-size:.96rem;margin-bottom:4px;color:var(--ink)}
+.gl p{margin:0;color:var(--ink2);font-size:.92rem}
+
+/* disclaimer + footer */
+.disc{background:var(--warn-soft);border:1px solid var(--edge-warn);border-radius:var(--radius);padding:24px;color:var(--ink)}
+.disc h3{color:var(--warn);margin-bottom:10px}
+.disc ul{margin:0;padding-left:20px;color:var(--ink2)}
+.disc li{margin-bottom:6px}
+footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px solid var(--line)}
+.fbrand{display:block;opacity:.75;font-size:11px;margin-top:8px;line-height:1.55}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn:hover,.pcard:hover{transform:none}
+  *{transition:none!important}
+}
+@media (pointer:coarse),(max-width:768px){
+  .btn,.btn.sm,.tab,.mbtn,.links a,.themectl button,.step-pill,.pcard{min-height:44px}
+  .themectl button{padding:0 10px}
+}
+@media (max-width:920px){
+  .preset-cards{grid-template-columns:1fr 1fr}
+  .sim-grid,.step-grid,.guard-grid,.grid2,.gl{grid-template-columns:1fr}
+  .clock-strip{grid-template-columns:repeat(6,1fr)}
+}
+@media (max-width:760px){
+  section{padding:52px 0}
+  .hero{padding:44px 0 36px}
+  .wrap{padding:0 16px}
+  .stats,.sliders,.meters,.step-pills{grid-template-columns:1fr}
+  .out{grid-template-columns:1fr 1fr}
+  .links{width:100%;margin-left:0;order:3}
+  .themectl{margin-left:auto}
+}
+@media (max-width:480px){
+  .preset-cards{grid-template-columns:1fr}
+  .themectl button{font-size:.72rem;padding:0 8px}
+  .brand{font-size:14px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="progress" aria-hidden="true"></div>
+
+<nav class="top" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#main"><span class="dot" aria-hidden="true"></span>NAVI Trade Panel <span class="btag">Visual Guide</span></a>
+    <div class="links" aria-label="Sections">
+      <a href="#start">Quick start</a>
+      <a href="#presets">Pick a preset</a>
+      <a href="#playground">Try the chart</a>
+      <a href="#autoexit">$1 auto-exit</a>
+      <a href="#shields">Safety shields</a>
+      <a href="#planner">Size planner</a>
+      <a href="#checklist">Checklist</a>
+    </div>
+    <div class="themectl" role="group" aria-label="Colour theme">
+      <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+      <button type="button" data-theme-set="system" aria-pressed="true">Match my computer</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+<section class="first hero">
+  <div class="wrap">
+    <span class="chip"><b>Educational only, not advice</b> Paper and demo accounts</span>
+    <h1>Trade Gold on MT5 with clarity.<br>No tech skills needed.</h1>
+    <p class="lede" style="margin-top:18px">This visual, click-and-try guide shows you how the NAVI Trade Panel works on MetaTrader 5. Pick a ready-made preset, test the live interactive Gold chart below, see how the built-in $1 auto-exit locks in profit, and switch safety shields on or off.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="#playground">Try the live demo chart</a>
+      <a class="btn" href="#start">3-step setup guide</a>
+      <a class="btn" href="#presets">Help me pick a preset</a>
+    </div>
+    <div class="stats" aria-label="Key highlights">
+      <div><b>Ready in 3 clicks</b><span>Load a pre-built Gold preset with zero coding</span></div>
+      <div><b>Built-in $1 auto-exit</b><span>Closes winning trades automatically without a second tool</span></div>
+      <div><b>5 optional shields</b><span>Turn session, daily loss, and margin guards on or off anytime</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Visual quick start</span>
+      <h2>Get running in 3 simple steps</h2>
+      <p class="lede">Your panel and all 8 Gold presets are already installed on your MT5 terminals. Tap each step to see exactly what to click on screen.</p>
+    </div>
+
+    <div class="step-pills" role="tablist" aria-label="Setup steps" id="stepTabs">
+      <button type="button" class="step-pill" role="tab" aria-selected="true" data-step="0">
+        <small>Step 1 of 3</small><strong>Drop onto a Gold chart</strong>
+      </button>
+      <button type="button" class="step-pill" role="tab" aria-selected="false" data-step="1">
+        <small>Step 2 of 3</small><strong>Click Load and pick a preset</strong>
+      </button>
+      <button type="button" class="step-pill" role="tab" aria-selected="false" data-step="2">
+        <small>Step 3 of 3</small><strong>Turn Algo Trading green</strong>
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="step-grid">
+        <div class="svgbox" id="stepSvg" aria-label="Visual MT5 screen illustration"></div>
+        <div id="stepText" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="presets">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">02 · Ready-made presets</span>
+      <h2>Which Gold preset should you pick?</h2>
+      <p class="lede">You do not have to type numbers by hand. Tap any card below to compare speed, safety protection, and see which file to pick when you click Load inside MT5.</p>
+    </div>
+
+    <div class="preset-cards" role="tablist" aria-label="Gold preset options" id="presetCards">
+      <button type="button" class="pcard" role="tab" aria-selected="true" data-p="protected">
+        <span class="pbadge">Recommended</span>
+        <strong>Protected Daily Mode</strong>
+        <p>Takes $1 exits automatically while skipping risky hours and protecting daily losses.</p>
+      </button>
+      <button type="button" class="pcard" role="tab" aria-selected="false" data-p="parity">
+        <span class="pbadge">Side-by-side test</span>
+        <strong>Exact Match ($1 Exit)</strong>
+        <p>Same 17-step Gold grid with $1 auto-exit built in and extra shields turned off.</p>
+      </button>
+      <button type="button" class="pcard" role="tab" aria-selected="false" data-p="velocity">
+        <span class="pbadge">Capped steps</span>
+        <strong>Fast M1 Scalper</strong>
+        <p>Limits open steps to 10 max, aims for $1.50 exits, and trims losing trades faster.</p>
+      </button>
+      <button type="button" class="pcard" role="tab" aria-selected="false" data-p="optimizer">
+        <span class="pbadge">Strategy Tester</span>
+        <strong>Auto Settings Finder</strong>
+        <p>Lets MT5 test hundreds of combinations on past Gold history automatically.</p>
+      </button>
+    </div>
+
+    <div class="card" id="presetDetail" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="playground">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Interactive playground</span>
+      <h2>Click the buttons and watch the chart react</h2>
+      <p class="lede">Try clicking <strong>BUY</strong>, <strong>SELL</strong>, moving Gold price up or down, or hitting <strong>Play Live Price</strong>. Watch the built-in dollar auto-exit close winning trades automatically. All figures shown are <strong class="mono">sample data</strong>.</p>
+    </div>
+
+    <div class="sim-grid">
+      <div class="chart-card">
+        <div class="chart-top">
+          <span class="sym"><span class="dot" aria-hidden="true"></span>XAUUSD (Gold) Demo Chart <span class="tag sample">SAMPLE DATA</span></span>
+          <span class="price-pill" id="simPrice">$2,642.50</span>
+        </div>
+
+        <div class="svgbox" style="padding:8px">
+          <svg id="chartSvg" viewBox="0 0 600 280" role="img" aria-label="Interactive simulated Gold candlestick chart"></svg>
+        </div>
+
+        <div class="chart-controls">
+          <button type="button" class="btn sm primary" id="btnPlay">Play Live Price</button>
+          <button type="button" class="btn sm" id="btnUp">Price Up +$1.20</button>
+          <button type="button" class="btn sm" id="btnDown">Price Down -$1.20</button>
+          <button type="button" class="btn sm" id="btnReset">Reset Demo</button>
+          <span class="faint small" style="margin-left:auto">Auto-Exit Target:</span>
+          <button type="button" class="mbtn on" data-tp="1">$1.00</button>
+          <button type="button" class="mbtn" data-tp="2">$2.00</button>
+          <button type="button" class="mbtn" data-tp="5">$5.00</button>
+        </div>
+
+        <div class="toast" id="simToast" aria-live="polite">Click BUY or SELL on the panel, then click Price Up or Play Live Price to watch the $1.00 auto-exit fire.</div>
+      </div>
+
+      <div>
+        <div class="tabs" role="tablist" aria-label="Panel views" id="ptabs" style="margin-bottom:10px">
+          <button type="button" class="tab" role="tab" aria-selected="true" data-view="main">Main</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-view="auto">Auto</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-view="signal">Signals</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-view="stats">Profit</button>
+        </div>
+
+        <div class="mt5mock" id="panelMock" aria-label="Interactive NAVI panel controls"></div>
+
+        <div class="callout" id="panelExplain" aria-live="polite">
+          <strong>Tip:</strong> Every button on this panel works in real time on MT5. Tap any drawer tab above or click BUY / SELL to see it in action.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="autoexit">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">04 · How exits and timing work</span>
+      <h2>See the built-in $1 auto-exit in plain pictures</h2>
+      <p class="lede">Before, you needed two separate tools on your chart. Now the NAVI panel handles entries, exits, and quiet hours all in one place. Switch views below to see how.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Visual exit modes" id="exitTabs">
+      <button type="button" class="tab" role="tab" aria-selected="true" data-ex="pertrade">Close Each Trade at $1</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-ex="basket">Close Whole Group Together</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-ex="hours">Skip the 4 Risky Hours</button>
+    </div>
+
+    <div class="card" id="exitBody" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="shields">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Optional safety shields</span>
+      <h2>Turn protection on or off with simple switches</h2>
+      <p class="lede">Every extra shield is 100% optional. Flip the switches below to preview how they protect your demo account if Gold makes a sudden sharp move.</p>
+    </div>
+
+    <div class="guard-grid">
+      <div id="guardList"></div>
+      <div class="card" id="guardSummary" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="planner">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">06 · Simple size planner</span>
+      <h2>Slide to preview your trade size and safety brake</h2>
+      <p class="lede">Move the sliders to see how your starting trade size grows across steps and where your daily safety brake stops trading. Numbers below are <strong class="mono">sample data</strong> for learning only.</p>
+    </div>
+
+    <div class="card">
+      <span class="tag sample">SAMPLE DATA</span><h3 style="display:inline">Interactive trade-step preview</h3>
+      <div class="sliders">
+        <div class="sbox">
+          <label for="s_bal"><span>Demo Account Size</span><b id="v_bal">$10,000</b></label>
+          <input id="s_bal" type="range" min="1000" max="50000" step="500" value="10000">
+        </div>
+        <div class="sbox">
+          <label for="s_lot"><span>Starting Trade Size (Step 1)</span><b id="v_lot">0.01 lot</b></label>
+          <input id="s_lot" type="range" min="1" max="10" step="1" value="1">
+        </div>
+        <div class="sbox">
+          <label for="s_steps"><span>Max Open Steps Allowed</span><b id="v_steps">10 steps</b></label>
+          <input id="s_steps" type="range" min="1" max="17" step="1" value="10">
+        </div>
+        <div class="sbox">
+          <label for="s_brake"><span>Daily Loss Brake</span><b id="v_brake">3.0%</b></label>
+          <input id="s_brake" type="range" min="1" max="10" step="0.5" value="3">
+        </div>
+      </div>
+
+      <div class="out" id="p_out" aria-live="polite"></div>
+
+      <div class="bars-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+          <strong class="small">Visual step-by-step size ladder (sample data)</strong>
+          <span class="faint small">Taller bar = larger trade size on deeper pullbacks</span>
+        </div>
+        <svg id="barsSvg" viewBox="0 0 600 130" role="img" aria-label="Visual bar chart of trade sizes per grid step" style="width:100%;height:auto;display:block"></svg>
+      </div>
+
+      <div class="callout" id="p_note"></div>
+    </div>
+  </div>
+</section>
+
+<section id="checklist">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">07 · Readiness check and dictionary</span>
+      <h2>Quick confidence check before demo trading</h2>
+      <p class="lede">Answer 3 plain-English questions, tick through your demo checklist, and look up any trading term below.</p>
+    </div>
+
+    <div class="grid2" style="margin-bottom:28px">
+      <div class="card">
+        <span class="tag">QUICK CHECK</span><h3 style="display:inline">3-question confidence quiz</h3>
+        <div id="qz"></div>
+      </div>
+
+      <div class="card">
+        <span class="tag">CHECKLIST</span><h3 style="display:inline">Demo pre-flight list</h3>
+        <p class="muted small" style="margin-top:8px">Tick each box as you check it in your MT5 terminal.</p>
+        <div class="check" id="ck"></div>
+        <div class="meter" aria-hidden="true"><i id="ckm"></i></div>
+        <span class="faint small mono" id="ckt">0 of 6 checked</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:6px">Plain-English dictionary</h3>
+      <p class="muted small" style="margin-bottom:14px">Type any word you see on the MT5 screen to get a simple one-sentence explanation.</p>
+      <input class="gl-search" id="gs" type="search" placeholder="Search a word, for example Preset, FIX, Shield, or Break-Even" aria-label="Search plain-English dictionary">
+      <div class="gl" id="gl"></div>
+    </div>
+  </div>
+</section>
+
+<section id="disclaimer">
+  <div class="wrap">
+    <div class="disc">
+      <h3>Disclaimer and Terms</h3>
+      <ul>
+        <li>This page is an educational demo. It is not financial, investment, tax, or legal advice.</li>
+        <li>Figures shown in the live chart playground, preset scorecards, and size planner are sample data and may be out of date.</li>
+        <li>Historical tests and MT5 Strategy Tester runs use past prices and do not guarantee future results.</li>
+        <li>Gold scalping and multi-step strategies carry real risk of loss. Practice thoroughly on paper and demo accounts first.</li>
+        <li>Never share broker logins, account numbers, API tokens, or passwords in screenshots, presets, or public folders.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Paper and demo accounts. Educational only. Not investment advice. <a href="#disclaimer">Disclaimer and Terms</a>
+    <span class="fbrand">
+      NAVI Trade Panel - a product of Zuuro HQ.<br>
+      All Rights Reserved | ZuuroHQ<br>
+      Built with <span role="img" aria-label="love">&#10084;&#65039;</span> from <span role="img" aria-label="the United Kingdom">&#127468;&#127463;</span>
+    </span>
+  </div>
+</footer>
+
+<script data-theme-ctl>
+(function(){
+  "use strict";
+  var K="navi_theme", r=document.documentElement;
+  function cur(){var t=r.getAttribute("data-theme");return t==="light"||t==="dark"?t:"system"}
+  function mark(){
+    var c=cur();
+    document.querySelectorAll("[data-theme-set]").forEach(function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-theme-set")===c ? "true" : "false");
+    });
+  }
+  document.querySelectorAll("[data-theme-set]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var v=b.getAttribute("data-theme-set");
+      if(v==="light"||v==="dark") r.setAttribute("data-theme",v);
+      else r.removeAttribute("data-theme");
+      try{ if(v==="system") localStorage.removeItem(K); else localStorage.setItem(K,v); }catch(e){}
+      mark();
+    });
+  });
+  mark();
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  var $=function(s,p){return (p||document).querySelector(s)};
+  var $$=function(s,p){return Array.prototype.slice.call((p||document).querySelectorAll(s))};
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+  // Scroll progress + active nav link
+  var prog=$("#progress");
+  window.addEventListener("scroll",function(){
+    var h=document.documentElement, d=Math.max(1, h.scrollHeight - h.clientHeight);
+    prog.style.width=(h.scrollTop/d*100)+"%";
+  },{passive:true});
+
+  var secs=$$("section[id]"), links=$$(".links a");
+  if("IntersectionObserver" in window){
+    var so=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){a.classList.toggle("on", a.getAttribute("href")==="#"+e.target.id)});
+        }
+      });
+    },{rootMargin:"-35% 0px -58% 0px"});
+    secs.forEach(function(s){so.observe(s)});
+  }
+
+  // =========================================================
+  // 01 VISUAL 3-STEP QUICK START
+  // =========================================================
+  var STEPS=[
+    {
+      title:"Open MT5 and drag the panel onto your Gold chart",
+      intro:"Your panel is already compiled and sitting inside your MT5 Navigator sidebar.",
+      bullets:[
+        "Open a Demo Gold (XAUUSD) chart on M1 or M5.",
+        "In the left Navigator panel, right-click Expert Advisors and click Refresh.",
+        "Drag Zuuro Semi-Automated Trading Panel EA with Indicators onto the chart."
+      ],
+      tip:"Leave Allow DLL imports unchecked. This panel is 100% self-contained and never needs external DLLs.",
+      svg:'<svg viewBox="0 0 460 250" role="img" aria-label="Step 1 MT5 Navigator to Gold chart">'+
+          '<rect x="8" y="8" width="444" height="234" rx="12" fill="var(--surface)" stroke="var(--line)"/>'+
+          '<rect x="8" y="8" width="444" height="30" rx="12" fill="var(--sunken)" stroke="var(--line)"/>'+
+          '<circle cx="26" cy="23" r="5" fill="var(--bad)"/><circle cx="42" cy="23" r="5" fill="var(--warn)"/><circle cx="58" cy="23" r="5" fill="var(--accent)"/>'+
+          '<text x="80" y="27" font-size="11" font-family="var(--sans)" font-weight="600" fill="var(--ink2)">MetaTrader 5  |  XAUUSD, M1</text>'+
+          '<rect x="18" y="48" width="150" height="184" rx="8" fill="var(--sunken)" stroke="var(--line)"/>'+
+          '<text x="28" y="68" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--ink)">Navigator</text>'+
+          '<text x="28" y="90" font-size="10" font-family="var(--sans)" fill="var(--ink3)">Expert Advisors</text>'+
+          '<rect x="24" y="100" width="138" height="32" rx="7" fill="var(--sel-bg)"/>'+
+          '<text x="32" y="114" font-size="9.5" font-family="var(--sans)" font-weight="600" fill="var(--sel-ink)">Zuuro Trade Panel</text>'+
+          '<text x="32" y="126" font-size="8.5" font-family="var(--sans)" fill="var(--sel-ink)" opacity="0.8">Drag onto chart</text>'+
+          '<rect x="182" y="48" width="258" height="184" rx="8" fill="var(--bg)" stroke="var(--line)"/>'+
+          '<text x="196" y="68" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--ink)">XAUUSD Chart</text>'+
+          '<polyline points="196,195 230,175 265,182 305,142 345,152 390,108 424,116" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>'+
+          '<path d="M164 116 C210 116, 225 116, 265 130" fill="none" stroke="var(--accent)" stroke-width="3" stroke-dasharray="5 4"/>'+
+          '<polygon points="274,133 261,124 263,138" fill="var(--accent)"/>'+
+          '<rect x="278" y="118" width="136" height="34" rx="17" fill="var(--accent-soft)" stroke="var(--edge-ok)"/>'+
+          '<text x="346" y="139" text-anchor="middle" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--accent)">Drop right here</text>'+
+          '</svg>'
+    },
+    {
+      title:"Click Load and choose your Gold preset",
+      intro:"Instead of typing settings one by one, load one of the ready-made preset files.",
+      bullets:[
+        "In the window that pops up, click the Inputs tab at the top.",
+        "Click the Load button in the bottom-right corner.",
+        "Pick Zuuro_Gold_v3_Protected.set (recommended) or Zuuro_Gold_v3_Parity.set and click OK."
+      ],
+      tip:"Do not attach any old external TP/SL utility EA on the same chart. The $1.00 auto-exit is already built inside.",
+      svg:'<svg viewBox="0 0 460 250" role="img" aria-label="Step 2 Load Preset inside MT5 Inputs">'+
+          '<rect x="28" y="14" width="404" height="222" rx="12" fill="var(--surface)" stroke="var(--line)"/>'+
+          '<rect x="28" y="14" width="404" height="34" rx="12" fill="var(--sunken)" stroke="var(--line)"/>'+
+          '<text x="44" y="35" font-size="11" font-family="var(--sans)" fill="var(--ink2)">Common</text>'+
+          '<rect x="104" y="20" width="66" height="22" rx="11" fill="var(--sel-bg)"/>'+
+          '<text x="137" y="35" text-anchor="middle" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--sel-ink)">Inputs</text>'+
+          '<rect x="44" y="60" width="372" height="26" rx="6" fill="var(--sunken)"/>'+
+          '<text x="54" y="77" font-size="10.5" font-family="var(--mono)" fill="var(--ink)">UseValueTPSL</text>'+
+          '<text x="320" y="77" font-size="10.5" font-family="var(--mono)" font-weight="700" fill="var(--accent)">true</text>'+
+          '<rect x="44" y="92" width="372" height="26" rx="6" fill="var(--surface)" stroke="var(--line)"/>'+
+          '<text x="54" y="109" font-size="10.5" font-family="var(--mono)" fill="var(--ink)">ValueTP_Money ($)</text>'+
+          '<text x="320" y="109" font-size="10.5" font-family="var(--mono)" font-weight="700" fill="var(--accent)">1.00</text>'+
+          '<rect x="44" y="124" width="372" height="26" rx="6" fill="var(--sunken)"/>'+
+          '<text x="54" y="141" font-size="10.5" font-family="var(--mono)" fill="var(--ink)">BlockedHoursCSV</text>'+
+          '<text x="320" y="141" font-size="10.5" font-family="var(--mono)" fill="var(--ink2)">4,14,17,20</text>'+
+          '<rect x="44" y="176" width="218" height="40" rx="10" fill="var(--accent-soft)" stroke="var(--edge-ok)"/>'+
+          '<text x="56" y="193" font-size="10" font-family="var(--sans)" font-weight="700" fill="var(--accent)">Selected preset file:</text>'+
+          '<text x="56" y="208" font-size="10" font-family="var(--mono)" fill="var(--ink)">Zuuro_Gold_v3_Protected.set</text>'+
+          '<rect x="276" y="178" width="66" height="36" rx="18" fill="var(--sel-bg)"/>'+
+          '<text x="309" y="200" text-anchor="middle" font-size="12" font-family="var(--sans)" font-weight="700" fill="var(--sel-ink)">Load</text>'+
+          '<rect x="350" y="178" width="66" height="36" rx="18" fill="var(--accent)"/>'+
+          '<text x="383" y="200" text-anchor="middle" font-size="12" font-family="var(--sans)" font-weight="700" fill="var(--on-accent)">OK</text>'+
+          '</svg>'
+    },
+    {
+      title:"Check Algo Trading is green and watch the panel appear",
+      intro:"Once you click OK, the NAVI Trade Panel appears cleanly in the top-left corner of your chart.",
+      bullets:[
+        "Look at the top MT5 toolbar and make sure the Algo Trading button shows a green play icon.",
+        "Check the small GRD badge on the panel: it tells you live whether safety shields are clear (OK) or pausing during a risky hour.",
+        "Click a small 0.01 demo BUY or SELL to verify everything works smoothly."
+      ],
+      tip:"Want to match your MT5 dark or light chart? Change PanelTheme in Inputs between Light and Dark anytime.",
+      svg:'<svg viewBox="0 0 460 250" role="img" aria-label="Step 3 Algo Trading ON and NAVI Panel live on chart">'+
+          '<rect x="8" y="8" width="444" height="234" rx="12" fill="var(--surface)" stroke="var(--line)"/>'+
+          '<rect x="8" y="8" width="444" height="38" rx="12" fill="var(--sunken)" stroke="var(--line)"/>'+
+          '<rect x="24" y="15" width="118" height="24" rx="12" fill="var(--accent-soft)" stroke="var(--edge-ok)"/>'+
+          '<circle cx="38" cy="27" r="5" fill="var(--accent)"/>'+
+          '<text x="49" y="31" font-size="10.5" font-family="var(--sans)" font-weight="700" fill="var(--accent)">Algo Trading ON</text>'+
+          '<rect x="24" y="58" width="166" height="170" rx="12" fill="var(--surface)" stroke="var(--line)"/>'+
+          '<circle cx="38" cy="74" r="4" fill="var(--accent)"/>'+
+          '<text x="48" y="78" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--ink)">NAVI Panel</text>'+
+          '<rect x="130" y="66" width="48" height="16" rx="8" fill="var(--accent-soft)"/>'+
+          '<text x="154" y="77" text-anchor="middle" font-size="9" font-family="var(--mono)" font-weight="700" fill="var(--accent)">GRD OK</text>'+
+          '<rect x="34" y="92" width="70" height="28" rx="14" fill="var(--accent)"/>'+
+          '<text x="69" y="110" text-anchor="middle" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--on-accent)">BUY</text>'+
+          '<rect x="110" y="92" width="70" height="28" rx="14" fill="var(--bad)"/>'+
+          '<text x="145" y="110" text-anchor="middle" font-size="11" font-family="var(--sans)" font-weight="700" fill="var(--on-accent)">SELL</text>'+
+          '<rect x="34" y="130" width="146" height="26" rx="8" fill="var(--sunken)"/>'+
+          '<text x="107" y="147" text-anchor="middle" font-size="10" font-family="var(--mono)" fill="var(--accent)">AUTO $1 EXIT: READY</text>'+
+          '<rect x="34" y="166" width="146" height="26" rx="13" fill="var(--sel-bg)"/>'+
+          '<text x="107" y="183" text-anchor="middle" font-size="10" font-family="var(--sans)" font-weight="700" fill="var(--sel-ink)">X CLOSE ALL</text>'+
+          '<polyline points="210,196 248,176 284,186 324,136 364,148 410,96 436,104" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>'+
+          '<line x1="208" y1="126" x2="438" y2="126" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>'+
+          '<rect x="294" y="106" width="132" height="20" rx="10" fill="var(--accent-soft)" stroke="var(--edge-ok)"/>'+
+          '<text x="360" y="120" text-anchor="middle" font-size="9.5" font-family="var(--mono)" font-weight="700" fill="var(--accent)">$1.00 Auto-Exit Line</text>'+
+          '</svg>'
+    }
+  ];
+  var curStep=0;
+  function renderStep(i){
+    curStep=i;
+    $$("#stepTabs button").forEach(function(b,idx){b.setAttribute("aria-selected", idx===i ? "true" : "false")});
+    var s=STEPS[i];
+    $("#stepSvg").innerHTML=s.svg;
+    $("#stepText").innerHTML=
+      "<span class='tag'>STEP "+(i+1)+" OF 3</span><h3 style='display:inline'>"+esc(s.title)+"</h3>"+
+      "<p class='muted' style='margin-top:10px'>"+esc(s.intro)+"</p>"+
+      "<ol class='step-list'>"+s.bullets.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ol>"+
+      "<div class='callout'><strong>Good to know:</strong> "+esc(s.tip)+"</div>"+
+      "<div class='cta-row' style='margin-top:16px'>"+
+      (i>0 ? "<button type='button' class='btn sm' id='prevSt'>Previous step</button>" : "")+
+      (i<STEPS.length-1 ? "<button type='button' class='btn sm primary' id='nextSt'>Next step</button>" : "<a class='btn sm primary' href='#presets'>Now pick your preset</a>")+
+      "</div>";
+    var pv=$("#prevSt"), nx=$("#nextSt");
+    if(pv) pv.addEventListener("click",function(){renderStep(i-1)});
+    if(nx) nx.addEventListener("click",function(){renderStep(i+1)});
+  }
+  $$("#stepTabs button").forEach(function(b){b.addEventListener("click",function(){renderStep(+b.dataset.step)})});
+  renderStep(0);
+
+  // =========================================================
+  // 02 VISUAL PRESET PICKER
+  // =========================================================
+  var PRESETS={
+    protected:{
+      name:"Protected Daily Mode",
+      file:"Zuuro_Gold_v3_Protected.set",
+      badge:"Recommended for everyday demo testing",
+      summary:"Runs the exact 17-step Gold grid and built-in $1.00 auto-exit, while turning on your safety shields to block the 4 worst server hours, cap daily losses at 3%, lock profits before weekends, and guard margin.",
+      speed:85, safety:92, steps:100, stepsLabel:"Up to 17 steps",
+      onList:["Built-in $1.00 Auto-Exit per trade","Skips risky server hours (04:00, 14:00, 17:00, 20:00)","Daily 3% Loss Brake with automatic close","Friday weekend lock + Margin Shield + Spread limit (5 pips)"],
+      bestFor:"Traders who like fast $1 Gold exits and want automatic protection against sudden news spikes."
+    },
+    parity:{
+      name:"Exact Match ($1 Auto-Exit)",
+      file:"Zuuro_Gold_v3_Parity.set",
+      badge:"1-to-1 baseline comparison",
+      summary:"Matches your original 17-step Gold sizing and $1.00 virtual auto-exit with every extra safety shield switched off. Perfect for comparing side by side on a demo account before enabling shields.",
+      speed:95, safety:35, steps:100, stepsLabel:"Up to 17 steps",
+      onList:["Built-in $1.00 Auto-Exit per trade (no second tool needed)","Full 17-step Gold lot ladder (0.01 up to 0.15)","Exact Buy/Sell NoLoss and Trailing settings","All optional MAMS shields switched OFF"],
+      bestFor:"Testing that the NAVI panel matches your previous workflow on day one."
+    },
+    velocity:{
+      name:"Fast M1 Scalper (Capped Risk)",
+      file:"Zuuro_Gold_v3_HighVelocity_M1.set",
+      badge:"Lower max exposure on 1-minute Gold",
+      summary:"Limits the grid to 10 steps max (stopping deep pullbacks from growing too large), aims for $1.50 per exit, pairs winners with losers to trim drawdown, and pauses 15 minutes after any stop loss.",
+      speed:78, safety:96, steps:59, stepsLabel:"Capped at 10 steps",
+      onList:["Built-in $1.50 Auto-Exit per trade","Capped at 10 steps max (0.01 to 0.10)","Drawdown trimming (Overlap 20%) + 15-min cool-down after a loss","Blocked risky hours + Margin Shield"],
+      bestFor:"Smaller demo balances or anyone who wants tighter control on fast 1-minute Gold charts."
+    },
+    optimizer:{
+      name:"Automatic Settings Finder",
+      file:"Zuuro_Gold_v3_Optimizer_ValueTP.set",
+      badge:"For MT5 Strategy Tester only",
+      summary:"Load this inside MT5 Strategy Tester to let your computer test hundreds of combinations of dollar profit targets ($0.50 to $4.00), max steps, and safety guards on historical Gold data.",
+      speed:60, safety:85, steps:70, stepsLabel:"Tests 4 to 17 steps",
+      onList:["Tests dollar profit targets from $0.50 up to $4.00","Tests grid spacing and drawdown trimming automatically","Scores results for steady return and low drawdown","Turns graphics off during testing so your PC runs fast"],
+      bestFor:"Finding the best-fitting settings for your broker's Gold spread before trading live."
+    }
+  };
+  function renderPreset(key){
+    $$("#presetCards button").forEach(function(b){b.setAttribute("aria-selected", b.dataset.p===key ? "true" : "false")});
+    var p=PRESETS[key];
+    $("#presetDetail").innerHTML=
+      "<span class='tag'>"+esc(p.badge)+"</span><h3 style='display:inline'>"+esc(p.name)+"</h3>"+
+      "<p class='muted' style='margin-top:10px'>"+esc(p.summary)+"</p>"+
+      "<div class='meters'>"+
+        "<div class='mrow-bar'><label><span>Safety protection</span><span class='mono'>"+p.safety+"%</span></label><div class='track'><i style='width:"+p.safety+"%'></i></div></div>"+
+        "<div class='mrow-bar'><label><span>Trade pace</span><span class='mono'>"+p.speed+"%</span></label><div class='track'><i style='width:"+p.speed+"%'></i></div></div>"+
+        "<div class='mrow-bar'><label><span>Max grid steps</span><span class='mono'>"+esc(p.stepsLabel)+"</span></label><div class='track'><i style='width:"+p.steps+"%'></i></div></div>"+
+      "</div>"+
+      "<div class='grid2' style='margin-top:12px'>"+
+        "<div><strong class='small'>What is switched ON:</strong><ul class='step-list'>"+p.onList.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul></div>"+
+        "<div><strong class='small'>Best fit:</strong><p class='muted small' style='margin-top:8px'>"+esc(p.bestFor)+"</p>"+
+        "<div class='copyrow'><code>"+esc(p.file)+"</code><button type='button' class='btn sm primary' id='copyPreset'>Copy file name</button></div></div>"+
+      "</div>";
+    $("#copyPreset").addEventListener("click",function(){
+      var btn=this;
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(p.file).catch(function(){});
+      }
+      btn.textContent="Copied!";
+      setTimeout(function(){btn.textContent="Copy file name"},1500);
+    });
+  }
+  $$("#presetCards button").forEach(function(b){b.addEventListener("click",function(){renderPreset(b.dataset.p)})});
+  renderPreset("protected");
+
+  // =========================================================
+  // 03 LIVE INTERACTIVE GOLD CHART + NAVI PANEL SIMULATOR
+  // =========================================================
+  var sim={
+    price:2642.50,
+    candles:[
+      [2640.2,2641.4,2639.8,2641.1],[2641.1,2641.9,2640.5,2640.8],
+      [2640.8,2642.0,2640.4,2641.8],[2641.8,2642.3,2641.2,2641.5],
+      [2641.5,2642.6,2641.3,2642.4],[2642.4,2642.9,2641.9,2642.1],
+      [2642.1,2642.8,2641.7,2642.6],[2642.6,2643.1,2642.0,2642.3],
+      [2642.3,2642.9,2641.8,2642.5]
+    ],
+    trades:[], // {id, side:'BUY'|'SELL', entry, lot}
+    nextId:1,
+    tpMoney:1.0,
+    autoExitOn:true,
+    serialOn:true,
+    fixedLine:null,
+    banked:12.40,
+    closedCount:8,
+    playing:false,
+    timer:null,
+    view:"main"
+  };
+
+  function tradePL(tr){
+    var diff = (tr.side==="BUY") ? (sim.price - tr.entry) : (tr.entry - sim.price);
+    // $1 move on 0.01 lot Gold = $1.00 (sample data math)
+    return diff * (tr.lot * 100);
+  }
+  function totalFloat(){
+    return sim.trades.reduce(function(acc,t){return acc + tradePL(t)}, 0);
+  }
+  function setToast(msg, ok){
+    var el=$("#simToast");
+    el.textContent=msg;
+    el.className="toast" + (ok ? " ok" : "");
+  }
+
+  function stepPrice(delta){
+    var prev=sim.price;
+    sim.price=Math.round((sim.price + delta)*100)/100;
+    var hi=Math.max(prev, sim.price) + 0.35;
+    var lo=Math.min(prev, sim.price) - 0.35;
+    sim.candles.push([prev, hi, lo, sim.price]);
+    if(sim.candles.length>18) sim.candles.shift();
+
+    // Check built-in Dollar Auto-Exit
+    if(sim.autoExitOn && sim.trades.length){
+      var remaining=[], hitMsgs=[];
+      sim.trades.forEach(function(t){
+        var pl=tradePL(t);
+        if(pl >= sim.tpMoney){
+          sim.banked += pl;
+          sim.closedCount++;
+          hitMsgs.push(t.side+" #"+t.id+" auto-closed at +$"+pl.toFixed(2));
+        } else {
+          remaining.push(t);
+        }
+      });
+      sim.trades=remaining;
+      if(hitMsgs.length){
+        setToast("Built-in Auto-Exit fired: "+hitMsgs.join(", ")+" (sample data).", true);
+      }
+    }
+    drawChart();
+    renderPanel();
+  }
+
+  function drawChart(){
+    $("#simPrice").textContent="$"+sim.price.toFixed(2);
+    var allPrices=[sim.price];
+    sim.candles.forEach(function(c){allPrices.push(c[1],c[2])});
+    sim.trades.forEach(function(t){
+      allPrices.push(t.entry);
+      var tpPx = t.side==="BUY" ? t.entry + sim.tpMoney : t.entry - sim.tpMoney;
+      allPrices.push(tpPx);
+    });
+    if(sim.fixedLine) allPrices.push(sim.fixedLine);
+    var minP=Math.min.apply(null,allPrices) - 0.9;
+    var maxP=Math.max.apply(null,allPrices) + 0.9;
+    var span=Math.max(2.5, maxP - minP);
+    function py(p){return 24 + (1 - (p - minP)/span) * 232}
+
+    var out=[];
+    // Soft grid lines
+    for(var g=0; g<=4; g++){
+      var gy=24 + g*58;
+      var gp=maxP - (g/4)*span;
+      out.push('<line x1="12" y1="'+gy+'" x2="536" y2="'+gy+'" stroke="var(--line)" stroke-width="1"/>');
+      out.push('<text x="542" y="'+(gy+4)+'" font-size="10" font-family="var(--mono)" fill="var(--ink3)">'+gp.toFixed(1)+'</text>');
+    }
+
+    // Candlesticks
+    var n=sim.candles.length, cw=18, gap=9, startX=24;
+    sim.candles.forEach(function(c,idx){
+      var x=startX + idx*(cw+gap);
+      var up=c[3]>=c[0];
+      var col=up ? "var(--accent)" : "var(--bad)";
+      var yH=py(c[1]), yL=py(c[2]), yTop=py(Math.max(c[0],c[3])), yBot=py(Math.min(c[0],c[3]));
+      var bh=Math.max(3, yBot - yTop);
+      out.push('<line x1="'+(x+cw/2)+'" y1="'+yH.toFixed(1)+'" x2="'+(x+cw/2)+'" y2="'+yL.toFixed(1)+'" stroke="'+col+'" stroke-width="2"/>');
+      out.push('<rect x="'+x+'" y="'+yTop.toFixed(1)+'" width="'+cw+'" height="'+bh.toFixed(1)+'" rx="3" fill="'+col+'"/>');
+    });
+
+    // Current live price line
+    var curY=py(sim.price);
+    out.push('<line x1="12" y1="'+curY.toFixed(1)+'" x2="536" y2="'+curY.toFixed(1)+'" stroke="var(--ink)" stroke-width="1.2" stroke-dasharray="3 3"/>');
+    out.push('<rect x="536" y="'+(curY-10).toFixed(1)+'" width="60" height="20" rx="6" fill="var(--sel-bg)"/>');
+    out.push('<text x="566" y="'+(curY+4).toFixed(1)+'" text-anchor="middle" font-size="10" font-family="var(--mono)" font-weight="700" fill="var(--sel-ink)">'+sim.price.toFixed(1)+'</text>');
+
+    // Open trade entry + $1 Auto-Exit target lines
+    sim.trades.forEach(function(t){
+      var ey=py(t.entry);
+      var col=(t.side==="BUY") ? "var(--accent)" : "var(--bad)";
+      var pl=tradePL(t);
+      out.push('<line x1="12" y1="'+ey.toFixed(1)+'" x2="536" y2="'+ey.toFixed(1)+'" stroke="'+col+'" stroke-width="1.6"/>');
+      out.push('<rect x="18" y="'+(ey-11).toFixed(1)+'" width="136" height="20" rx="10" fill="var(--surface)" stroke="'+col+'"/>');
+      out.push('<text x="86" y="'+(ey+3).toFixed(1)+'" text-anchor="middle" font-size="10" font-family="var(--mono)" font-weight="700" fill="'+col+'">'+t.side+' #'+t.id+' '+(pl>=0?"+":"")+pl.toFixed(2)+'$</text>');
+
+      if(sim.autoExitOn){
+        var tpPx = t.side==="BUY" ? t.entry + sim.tpMoney : t.entry - sim.tpMoney;
+        var ty=py(tpPx);
+        out.push('<line x1="12" y1="'+ty.toFixed(1)+'" x2="536" y2="'+ty.toFixed(1)+'" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6 4"/>');
+        out.push('<rect x="372" y="'+(ty-10).toFixed(1)+'" width="156" height="19" rx="9" fill="var(--accent-soft)" stroke="var(--edge-ok)"/>');
+        out.push('<text x="450" y="'+(ty+3).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-family="var(--mono)" font-weight="700" fill="var(--accent)">Auto-Exit +$'+sim.tpMoney.toFixed(2)+'</text>');
+      }
+    });
+
+    if(sim.fixedLine){
+      var fy=py(sim.fixedLine);
+      out.push('<line x1="12" y1="'+fy.toFixed(1)+'" x2="536" y2="'+fy.toFixed(1)+'" stroke="var(--warn)" stroke-width="2" stroke-dasharray="4 3"/>');
+      out.push('<rect x="200" y="'+(fy-10).toFixed(1)+'" width="142" height="20" rx="10" fill="var(--warn-soft)" stroke="var(--edge-warn)"/>');
+      out.push('<text x="271" y="'+(fy+3).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-family="var(--mono)" font-weight="700" fill="var(--warn)">FIX Broker Target</text>');
+    }
+
+    $("#chartSvg").innerHTML=out.join("");
+  }
+
+  function explain(title, body){
+    $("#panelExplain").innerHTML="<strong>"+esc(title)+":</strong> "+esc(body);
+  }
+
+  function renderPanel(){
+    var box=$("#panelMock");
+    var fl=totalFloat();
+    var buys=sim.trades.filter(function(t){return t.side==="BUY"});
+    var sells=sim.trades.filter(function(t){return t.side==="SELL"});
+    var bPL=buys.reduce(function(a,t){return a+tradePL(t)},0);
+    var sPL=sells.reduce(function(a,t){return a+tradePL(t)},0);
+
+    if(sim.view==="main"){
+      box.innerHTML=
+        "<div class='mt5hdr'><span class='mbrand'><span class='dot'></span>NAVI Panel <span class='btag'>GRD OK</span></span><span class='tag sample'>SAMPLE</span></div>"+
+        "<div class='mrow'>"+
+          "<button type='button' class='mbtn buy' id='actBuy'>BUY 0.01</button>"+
+          "<button type='button' class='mbtn sell' id='actSell'>SELL 0.01</button>"+
+        "</div>"+
+        "<div class='mstat "+(buys.length?(bPL>=0?"pos":"neg"):"faint")+"'>"+
+          (buys.length ? "OPEN BUYS: "+buys.length+" | "+(bPL>=0?"+":"")+"$"+bPL.toFixed(2) : "NO OPEN BUY TRADES")+
+        "</div>"+
+        "<div class='mstat "+(sells.length?(sPL>=0?"pos":"neg"):"faint")+"'>"+
+          (sells.length ? "OPEN SELLS: "+sells.length+" | "+(sPL>=0?"+":"")+"$"+sPL.toFixed(2) : "NO OPEN SELL TRADES")+
+        "</div>"+
+        "<div class='mrow'>"+
+          "<button type='button' class='mbtn "+(sim.autoExitOn?"on":"")+"' id='actAutoExit'>$"+sim.tpMoney.toFixed(2)+" Auto-Exit: "+(sim.autoExitOn?"ON":"OFF")+"</button>"+
+          "<button type='button' class='mbtn "+(sim.serialOn?"on":"")+"' id='actSerial'>Group Mode: "+(sim.serialOn?"ON":"OFF")+"</button>"+
+        "</div>"+
+        "<button type='button' class='mbtn pri full' id='actCloseAll'>X CLOSE ALL ("+(fl>=0?"+":"")+"$"+fl.toFixed(2)+")</button>"+
+        "<div class='fixbar'>"+
+          "<span class='fixinfo'>Banked today: +$"+sim.banked.toFixed(2)+" ("+sim.closedCount+" wins)</span>"+
+          "<button type='button' class='mbtn pri' id='actFix'>FIX Target</button>"+
+          "<button type='button' class='mbtn sellsoft' id='actDelFix'>Clear</button>"+
+        "</div>";
+
+      $("#actBuy").addEventListener("click",function(){
+        sim.trades.push({id:sim.nextId++, side:"BUY", entry:sim.price, lot:0.01});
+        explain("BUY button","Opened a simulated 0.01 Gold Buy at $"+sim.price.toFixed(2)+". Now click Price Up or Play Live Price to see the $"+sim.tpMoney.toFixed(2)+" Auto-Exit close it for profit.");
+        setToast("Opened simulated BUY at $"+sim.price.toFixed(2)+" (sample data).", false);
+        drawChart(); renderPanel();
+      });
+      $("#actSell").addEventListener("click",function(){
+        sim.trades.push({id:sim.nextId++, side:"SELL", entry:sim.price, lot:0.01});
+        explain("SELL button","Opened a simulated 0.01 Gold Sell at $"+sim.price.toFixed(2)+". Click Price Down to see the $"+sim.tpMoney.toFixed(2)+" Auto-Exit bank the win.");
+        setToast("Opened simulated SELL at $"+sim.price.toFixed(2)+" (sample data).", false);
+        drawChart(); renderPanel();
+      });
+      $("#actAutoExit").addEventListener("click",function(){
+        sim.autoExitOn=!sim.autoExitOn;
+        explain("Built-in Auto-Exit", sim.autoExitOn ? "ON: As soon as any open trade reaches +$"+sim.tpMoney.toFixed(2)+", the panel closes it automatically without needing a second utility EA." : "OFF: Trades stay open until you close them or hit your broker Stop Loss or Take Profit.");
+        drawChart(); renderPanel();
+      });
+      $("#actSerial").addEventListener("click",function(){
+        sim.serialOn=!sim.serialOn;
+        explain("Group Mode (Serial)", sim.serialOn ? "ON: Treats all open Buy trades (or Sell trades) as one team using one shared Break-Even price." : "OFF: Manages each trade separately with its own target.");
+        renderPanel();
+      });
+      $("#actCloseAll").addEventListener("click",function(){
+        if(!sim.trades.length){ setToast("No open simulated trades to close.", false); return; }
+        var p=totalFloat();
+        sim.banked += p;
+        sim.closedCount += sim.trades.length;
+        sim.trades=[];
+        explain("X CLOSE ALL","Closes every open Buy and Sell trade on Gold instantly in one click.");
+        setToast("Closed all simulated trades for "+(p>=0?"+":"")+"$"+p.toFixed(2)+" (sample data).", p>=0);
+        drawChart(); renderPanel();
+      });
+      $("#actFix").addEventListener("click",function(){
+        sim.fixedLine = Math.round((sim.price + 2.2)*100)/100;
+        explain("FIX Target","In MT5, you drag the target line anywhere on the chart to preview the exact dollar profit, then press FIX once to save it with your broker.");
+        drawChart();
+      });
+      $("#actDelFix").addEventListener("click",function(){
+        sim.fixedLine = null;
+        explain("Clear SL+TP","Removes broker Stop Loss and Take Profit lines cleanly in one click.");
+        drawChart();
+      });
+    } else if(sim.view==="auto"){
+      box.innerHTML=
+        "<div class='mt5hdr'><span class='mbrand'><span class='dot'></span>AUTO SCALPING</span><span class='btag'>Sample</span></div>"+
+        "<div class='mrow'><button type='button' class='mbtn on' data-ex='Auto Buy'>Auto BUY: ON</button><button type='button' class='mbtn on' data-ex='Auto Sell'>Auto SELL: ON</button></div>"+
+        "<div style='display:grid;gap:6px'>"+
+        "<button type='button' class='mbtn on full' data-ex='Candle Filter'>Safe Candle Filter: ON</button>"+
+        "<button type='button' class='mbtn full' data-ex='Invert Switch'>Flip Buy / Sell Signals: OFF</button>"+
+        "<button type='button' class='mbtn full' data-ex='Daily Brake'>Max Direction Loss Brake: 3.0%</button>"+
+        "<button type='button' class='mbtn buysoft full' data-ex='Dollar Exit'>Built-in Dollar Exit: $"+sim.tpMoney.toFixed(2)+" per trade</button></div>";
+      $$("#panelMock [data-ex]").forEach(function(b){
+        b.addEventListener("click",function(){
+          var map={
+            "Auto Buy":"Lets the panel open new Buy steps automatically when your chosen indicators agree.",
+            "Auto Sell":"Lets the panel open new Sell steps automatically when your chosen indicators agree.",
+            "Candle Filter":"Stops the panel from buying into a giant falling red candle (or selling into a giant green spike).",
+            "Invert Switch":"Flips Buy and Sell signals in one click whenever you want to reverse a strategy.",
+            "Daily Brake":"Emergency safety stop that closes all trades in one direction if floating loss reaches your chosen % limit.",
+            "Dollar Exit":"Closes each open trade automatically as soon as it reaches your target dollar profit."
+          };
+          explain(b.dataset.ex, map[b.dataset.ex]);
+        });
+      });
+    } else if(sim.view==="signal"){
+      var inds=[["RSI",0,false],["Stochastic",0,false],["Williams %R",58,true],["CCI",0,false],["Trend ADX",0,false],["MACD",24,true],["Awesome Osc",0,false],["Momentum",0,false],["DeMarker",0,false],["EMA 50",0,false]];
+      box.innerHTML=
+        "<div class='mt5hdr'><span class='mbrand'><span class='dot'></span>10 TRAFFIC-LIGHT SIGNALS</span><span class='btag'>Sample</span></div>"+
+        inds.map(function(it){
+          var w=Math.min(48, Math.abs(it[1])/2), left=it[1]>=0 ? 50 : (50-w), col=it[1]>=0 ? "var(--accent)" : "var(--bad)";
+          return "<div class='indrow'><span style='font-weight:600;color:"+(it[2]?"var(--ink)":"var(--ink3)")+"'>"+esc(it[0])+"</span>"+
+            "<div class='gbar'><span class='gmid'></span>"+(it[2]?"<span class='gfill' style='left:"+left+"%;width:"+w+"%;background:"+col+"'></span>":"")+"</div>"+
+            "<span class='mono "+(it[2]?(it[1]>=0?"pos":"neg"):"faint")+"' style='text-align:right'>"+(it[2]?"+"+it[1]:"OFF")+"</span></div>";
+        }).join("")+
+        "<div class='faint small' style='margin-top:8px'>Turn off indicators you do not use so MT5 stays fast and light.</div>";
+      explain("10 Traffic-Light Signals","Each active indicator votes from -100 (strong sell) to +100 (strong buy). Unused indicators stay off and use zero computer power.");
+    } else {
+      box.innerHTML=
+        "<div class='mt5hdr'><span class='mbrand'><span class='dot'></span>DAILY PROFIT TRACKER</span><span class='btag'>Sample data</span></div>"+
+        "<div class='mstat'>DEMO BALANCE: $10,000.00</div>"+
+        "<div class='mstat pos'>TODAY BANKED: +$"+sim.banked.toFixed(2)+" ("+sim.closedCount+" trades)</div>"+
+        "<div class='mstat faint'>YESTERDAY: +$84.20 (+0.85%)</div>"+
+        "<div class='mstat faint'>THIS WEEK: +$290.50 (+2.91%)</div>"+
+        "<div class='mstat faint'>THIS MONTH: +$610.00 (+6.10%)</div>";
+      explain("Daily Profit Tracker","Shows Today, Yesterday, This Week, and This Month at a glance without ever slowing down live price ticks.");
+    }
+  }
+
+  $$("#ptabs button").forEach(function(t){
+    t.addEventListener("click",function(){
+      $$("#ptabs button").forEach(function(x){x.setAttribute("aria-selected", x===t ? "true" : "false")});
+      sim.view=t.dataset.view;
+      renderPanel();
+    });
+  });
+  $$("[data-tp]").forEach(function(b){
+    b.addEventListener("click",function(){
+      $$("[data-tp]").forEach(function(x){x.classList.remove("on")});
+      b.classList.add("on");
+      sim.tpMoney=parseFloat(b.dataset.tp);
+      drawChart(); renderPanel();
+    });
+  });
+  $("#btnUp").addEventListener("click",function(){stepPrice(1.20)});
+  $("#btnDown").addEventListener("click",function(){stepPrice(-1.20)});
+  $("#btnReset").addEventListener("click",function(){
+    if(sim.playing){ clearInterval(sim.timer); sim.playing=false; $("#btnPlay").textContent="Play Live Price"; }
+    sim.trades=[]; sim.fixedLine=null; sim.price=2642.50;
+    setToast("Demo chart reset. Click BUY or SELL to try again.", false);
+    drawChart(); renderPanel();
+  });
+  $("#btnPlay").addEventListener("click",function(){
+    if(sim.playing){
+      clearInterval(sim.timer); sim.playing=false; this.textContent="Play Live Price";
+    } else {
+      sim.playing=true; this.textContent="Pause Price";
+      if(!sim.trades.length){
+        sim.trades.push({id:sim.nextId++, side:"BUY", entry:sim.price, lot:0.01});
+        setToast("Opened a sample BUY trade so you can watch the auto-exit in action!", false);
+      }
+      var steps=[0.45,0.35,-0.25,0.55,0.40,-0.30,0.60,0.35];
+      var idx=0;
+      sim.timer=setInterval(function(){
+        stepPrice(steps[idx % steps.length]);
+        idx++;
+      }, 950);
+    }
+  });
+  drawChart();
+  renderPanel();
+
+  // =========================================================
+  // 04 VISUAL EXITS & HOURS
+  // =========================================================
+  var EXITS={
+    pertrade:
+      "<div class='step-grid'>"+
+        "<div class='svgbox'><svg viewBox='0 0 460 220' role='img' aria-label='Diagram showing per-trade $1 auto exit'>"+
+          "<rect x='8' y='8' width='444' height='204' rx='12' fill='var(--surface)' stroke='var(--line)'/>"+
+          "<polyline points='26,166 90,148 150,158 215,120 280,132 345,76 426,64' fill='none' stroke='var(--accent)' stroke-width='3' stroke-linecap='round'/>"+
+          "<circle cx='150' cy='158' r='6' fill='var(--sel-bg)'/>"+
+          "<text x='150' y='182' text-anchor='middle' font-size='10.5' font-family='var(--sans)' font-weight='700' fill='var(--ink)'>1. Trade opens</text>"+
+          "<line x1='26' y1='86' x2='434' y2='86' stroke='var(--accent)' stroke-width='2' stroke-dasharray='6 4'/>"+
+          "<circle cx='334' cy='86' r='8' fill='var(--accent)'/>"+
+          "<rect x='232' y='44' width='196' height='28' rx='14' fill='var(--accent-soft)' stroke='var(--edge-ok)'/>"+
+          "<text x='330' y='62' text-anchor='middle' font-size='11' font-family='var(--sans)' font-weight='700' fill='var(--accent)'>2. Hits +$1.00 -> Banks profit!</text>"+
+          "<text x='26' y='28' font-size='10.5' font-family='var(--sans)' fill='var(--ink2)'>Hidden from broker (EA closes instantly at market)</text>"+
+        "</svg></div>"+
+        "<div><span class='tag'>BUILT INTO GOLD V3</span><h3 style='display:inline'>Close each trade at +$1.00 automatically</h3>"+
+          "<p class='muted' style='margin-top:10px'>Every open trade is watched tick by tick. The moment a trade reaches <strong>+$1.00</strong> (after swap), the NAVI panel closes it immediately and locks in the win.</p>"+
+          "<ul class='step-list'>"+
+            "<li>Replaces external currency TP/SL utility EAs completely.</li>"+
+            "<li>Works cleanly with manual trades too when Magic is 0.</li>"+
+            "<li>You can change $1.00 to $1.50, $2.00, or any dollar amount in Inputs.</li>"+
+          "</ul></div>"+
+      "</div>",
+    basket:
+      "<div class='step-grid'>"+
+        "<div class='svgbox'><svg viewBox='0 0 460 220' role='img' aria-label='Diagram showing shared group Break-Even exit'>"+
+          "<rect x='8' y='8' width='444' height='204' rx='12' fill='var(--surface)' stroke='var(--line)'/>"+
+          "<line x1='24' y1='110' x2='436' y2='110' stroke='var(--warn)' stroke-width='2' stroke-dasharray='5 4'/>"+
+          "<rect x='260' y='88' width='168' height='20' rx='10' fill='var(--warn-soft)' stroke='var(--edge-warn)'/>"+
+          "<text x='344' y='101' text-anchor='middle' font-size='10' font-family='var(--sans)' font-weight='700' fill='var(--warn)'>Shared Break-Even Line</text>"+
+          "<polyline points='26,72 95,124 175,168 245,146 320,96 424,62' fill='none' stroke='var(--accent)' stroke-width='3' stroke-linecap='round'/>"+
+          "<circle cx='95' cy='124' r='5' fill='var(--sel-bg)'/><text x='95' y='142' text-anchor='middle' font-size='9.5' font-family='var(--sans)' fill='var(--ink)'>Step 1</text>"+
+          "<circle cx='175' cy='168' r='5' fill='var(--sel-bg)'/><text x='175' y='186' text-anchor='middle' font-size='9.5' font-family='var(--sans)' fill='var(--ink)'>Step 2</text>"+
+          "<circle cx='355' cy='80' r='8' fill='var(--accent)'/>"+
+          "<rect x='240' y='34' width='186' height='26' rx='13' fill='var(--accent-soft)' stroke='var(--edge-ok)'/>"+
+          "<text x='333' y='51' text-anchor='middle' font-size='10.5' font-family='var(--sans)' font-weight='700' fill='var(--accent)'>Whole group exits in profit!</text>"+
+        "</svg></div>"+
+        "<div><span class='tag'>GROUP MODE</span><h3 style='display:inline'>Close a whole basket together</h3>"+
+          "<p class='muted' style='margin-top:10px'>When multiple trades are open in the same direction, Group Mode (Serial) calculates one combined average entry line (including swap).</p>"+
+          "<ul class='step-list'>"+
+            "<li>You can also switch Dollar Auto-Exit to Basket Mode to exit all Buys or all Sells once the combined group hits your dollar target.</li>"+
+            "<li>Optional Overlap trimming pairs your strongest winner against your oldest loser to shrink drawdown smoothly.</li>"+
+          "</ul></div>"+
+      "</div>",
+    hours:
+      "<div><span class='tag'>FROM YOUR LIVE GOLD DATA</span><h3 style='display:inline'>Why skipping 4 server hours protects your week</h3>"+
+        "<p class='muted' style='margin-top:10px'>In your 2-day Gold report, over 95% of trades won, and nearly all drawdowns came during 4 specific broker server hours (red tiles below). Turning on <strong>Protected Daily Mode</strong> automatically pauses new entries during those 4 hours while still letting open trades take profit.</p>"+
+        "<div class='clock-strip'>"+
+        Array.from({length:24},function(_,h){
+          var blk=(h===4||h===14||h===17||h===20);
+          var lbl=(h<10?"0":"")+h+":00";
+          return "<div class='hr-cell"+(blk?" blk":"")+"'>"+lbl+"<span>"+(blk?"Paused":"Active")+"</span></div>";
+        }).join("")+
+        "</div>"+
+        "<div class='callout'><strong>Remember:</strong> Pausing an hour never locks you out of exits. Any open trade can still hit its +$1.00 Auto-Exit or Trail Stop normally.</div>"+
+      "</div>"
+  };
+  function renderExit(k){
+    $$("#exitTabs button").forEach(function(b){b.setAttribute("aria-selected", b.dataset.ex===k ? "true" : "false")});
+    $("#exitBody").innerHTML=EXITS[k];
+  }
+  $$("#exitTabs button").forEach(function(b){b.addEventListener("click",function(){renderExit(b.dataset.ex)})});
+  renderExit("pertrade");
+
+  // =========================================================
+  // 05 INTERACTIVE SAFETY GUARDS SWITCHBOARD
+  // =========================================================
+  var GUARDS=[
+    {id:"hours", name:"Skip the 4 Risky Hours", desc:"Pauses new entries at server hours 04:00, 14:00 (NY open), 17:00, and 20:00.", weight:25, on:true},
+    {id:"daily", name:"Daily 3% Loss Brake", desc:"Stops new trades and protects your balance if daily losses hit 3%.", weight:25, on:true},
+    {id:"shield", name:"Account Margin Shield", desc:"Shrinks oversized trades automatically if free margin gets tight.", weight:25, on:true},
+    {id:"weekend", name:"Friday Weekend Lock", desc:"Clears pending orders and protects open trades before markets close.", weight:15, on:true},
+    {id:"invert", name:"Flip Buy / Sell Signals", desc:"Reverses automatic Buy and Sell entries in one click when needed.", weight:10, on:false}
+  ];
+  function renderGuards(){
+    $("#guardList").innerHTML=GUARDS.map(function(g,idx){
+      return "<div class='gitem'><div><strong>"+esc(g.name)+"</strong><span>"+esc(g.desc)+"</span></div>"+
+        "<button type='button' class='sw' role='switch' aria-checked='"+(g.on?"true":"false")+"' aria-label='"+esc(g.name)+"' data-g='"+idx+"'></button></div>";
+    }).join("");
+    $$("#guardList .sw").forEach(function(b){
+      b.addEventListener("click",function(){
+        var idx=+b.dataset.g;
+        GUARDS[idx].on=!GUARDS[idx].on;
+        renderGuards();
+      });
+    });
+
+    var score=GUARDS.reduce(function(a,g){return a + (g.on ? g.weight : 0)}, 0);
+    var circ=2*Math.PI*36, dash=(score/100)*circ;
+    var level = score>=85 ? "Strong Protection" : (score>=50 ? "Balanced Protection" : "Basic Mode (Manual Oversight)");
+    var scenario = [];
+    if(GUARDS[0].on) scenario.push("New entries stay paused during sudden NY open spike hours.");
+    if(GUARDS[1].on) scenario.push("If floating loss hits 3% for the day, the brake triggers and stops the bleeding.");
+    if(GUARDS[2].on) scenario.push("Margin Shield automatically reduces trade sizes before margin runs low.");
+    if(GUARDS[3].on) scenario.push("Friday afternoon clears pending orders so you avoid Sunday gap surprises.");
+    if(GUARDS[4].on) scenario.push("Buy and Sell signals are currently flipped (counter-trend mode).");
+    if(!scenario.length) scenario.push("All extra shields are OFF. Only your base panel settings and $1.00 Auto-Exit are active.");
+
+    $("#guardSummary").innerHTML=
+      "<div class='shield-ring'>"+
+        "<svg class='ring-svg' viewBox='0 0 88 88' role='img' aria-label='Protection score "+score+" percent'>"+
+          "<circle cx='44' cy='44' r='36' fill='none' stroke='var(--line)' stroke-width='8'/>"+
+          "<circle cx='44' cy='44' r='36' fill='none' stroke='var(--accent)' stroke-width='8' stroke-linecap='round' stroke-dasharray='"+dash.toFixed(1)+" "+circ.toFixed(1)+"' transform='rotate(-90 44 44)'/>"+
+          "<text x='44' y='49' text-anchor='middle' font-size='16' font-family='var(--mono)' font-weight='700' fill='var(--ink)'>"+score+"%</text>"+
+        "</svg>"+
+        "<div><span class='tag'>LIVE PREVIEW</span><h3 style='margin-top:4px'>"+esc(level)+"</h3><p class='muted small' style='margin:4px 0 0'>Every shield defaults to OFF in the blank EA and turns ON automatically in Protected Daily Mode.</p></div>"+
+      "</div>"+
+      "<strong class='small'>What happens if Gold suddenly drops $20?</strong>"+
+      "<ul class='step-list'>"+scenario.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+"</ul>";
+  }
+  renderGuards();
+
+  // =========================================================
+  // 06 VISUAL SLIDER PLANNER
+  // =========================================================
+  var BASE_LADDER=[0.01,0.01,0.01,0.02,0.03,0.04,0.05,0.06,0.07,0.08,0.09,0.10,0.11,0.12,0.13,0.14,0.15];
+  function updatePlanner(){
+    var bal=+$("#s_bal").value;
+    var startLot=(+$("#s_lot").value)/100;
+    var steps=+$("#s_steps").value;
+    var brake=+$("#s_brake").value;
+
+    $("#v_bal").textContent="$"+bal.toLocaleString();
+    $("#v_lot").textContent=startLot.toFixed(2)+" lot";
+    $("#v_steps").textContent=steps+(steps===1?" step (single trade)":" steps");
+    $("#v_brake").textContent=brake.toFixed(1)+"%";
+
+    var mult=startLot/0.01;
+    var lots=[];
+    for(var i=0; i<steps; i++) lots.push(Math.round(BASE_LADDER[i]*mult*100)/100);
+    var totalLots=lots.reduce(function(a,b){return a+b},0);
+    var maxLoss=bal*(brake/100);
+
+    $("#p_out").innerHTML=
+      "<div><span>Step 1 Size</span><b>"+lots[0].toFixed(2)+"</b></div>"+
+      "<div><span>Last Step Size</span><b>"+lots[lots.length-1].toFixed(2)+"</b></div>"+
+      "<div><span>Full Ladder Total</span><b>"+totalLots.toFixed(2)+"</b></div>"+
+      "<div><span>Daily Loss Brake</span><b class='neg'>-$"+maxLoss.toFixed(0)+"</b></div>";
+
+    var maxV=Math.max.apply(null,lots);
+    var bw=Math.floor(560 / Math.max(steps,1)) - 4;
+    bw=Math.max(14, Math.min(44, bw));
+    var gap=Math.max(4, Math.floor((580 - bw*steps)/Math.max(steps,1)));
+    var bars=[];
+    lots.forEach(function(v,idx){
+      var h=Math.max(12, Math.round((v/maxV)*84));
+      var x=10 + idx*(bw+gap);
+      var y=104 - h;
+      var col=(idx>=10) ? "var(--warn)" : "var(--accent)";
+      bars.push('<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="5" fill="'+col+'"/>');
+      bars.push('<text x="'+(x+bw/2)+'" y="122" text-anchor="middle" font-size="9.5" font-family="var(--mono)" fill="var(--ink3)">#'+(idx+1)+'</text>');
+      if(steps<=12 || idx%2===0){
+        bars.push('<text x="'+(x+bw/2)+'" y="'+(y-4)+'" text-anchor="middle" font-size="9" font-family="var(--mono)" font-weight="600" fill="var(--ink2)">'+v.toFixed(2)+'</text>');
+      }
+    });
+    $("#barsSvg").innerHTML=bars.join("");
+
+    $("#p_note").textContent = steps===1
+      ? "Sample data: Pure single-trade mode. The panel opens at most 1 trade at "+lots[0].toFixed(2)+" lot and stops for the day if losses reach -$"+maxLoss.toFixed(0)+"."
+      : "Sample data: Across "+steps+" steps, total open size reaches "+totalLots.toFixed(2)+" lots. Keeping steps at 10 or fewer (green bars) avoids the heavier amber tail steps.";
+  }
+  ["#s_bal","#s_lot","#s_steps","#s_brake"].forEach(function(id){$(id).addEventListener("input",updatePlanner)});
+  updatePlanner();
+
+  // =========================================================
+  // 07 QUIZ, CHECKLIST & PLAIN-ENGLISH DICTIONARY
+  // =========================================================
+  var QZ=[
+    {q:"Do you still need to attach the old external Auto TP/SL helper EA on the same Gold chart?",opts:["No, the $1.00 auto-exit is built right inside NAVI Trade Panel","Yes, always run both together","Only on Fridays"],ok:0,why:"The built-in Auto TP/SL in Currency Value handles $1.00 exits natively. Running a second utility EA at the same time would conflict with it."},
+    {q:"Which preset should you pick if you want the $1.00 auto-exit PLUS automatic protection against risky hours and daily losses?",opts:["Zuuro_Gold_v3_Protected.set","No preset at all","Leave Algo Trading off"],ok:0,why:"Zuuro_Gold_v3_Protected.set turns on the built-in $1.00 exit, blocks the 4 riskiest hours, caps daily loss at 3%, and activates Margin Shield."},
+    {q:"Where should you always test a new preset first?",opts:["Straight on a large live account","On a Demo account or MT5 Strategy Tester","Without checking lot size"],ok:1,why:"Always verify lot size, spread behavior, and exits on a Demo account first before ever considering live funds."}
+  ];
+  var qi=0, score=0;
+  function renderQ(){
+    var host=$("#qz");
+    if(qi>=QZ.length){
+      host.innerHTML="<div class='fb ok' style='margin-top:14px'><b>Score: "+score+" of "+QZ.length+"</b>. You are ready to practice on your MT5 demo account.</div><button type='button' class='btn sm' style='margin-top:12px' id='qreset'>Try again</button>";
+      $("#qreset").addEventListener("click",function(){qi=0;score=0;renderQ()});
+      return;
+    }
+    var item=QZ[qi];
+    host.innerHTML="<div class='qbox'><span class='faint small mono'>Question "+(qi+1)+" of "+QZ.length+"</span><p style='margin:6px 0 0;font-weight:600'>"+esc(item.q)+"</p></div>"+
+      "<div class='ans'>"+item.opts.map(function(o,idx){return "<button type='button' class='btn sm' data-a='"+idx+"'>"+esc(o)+"</button>"}).join("")+"</div><div id='qfb'></div>";
+    $$("#qz [data-a]").forEach(function(b){
+      b.addEventListener("click",function(){
+        var pick=+b.dataset.a, right=(pick===item.ok);
+        if(right) score++;
+        $$("#qz [data-a]").forEach(function(x){x.disabled=true});
+        $("#qfb").innerHTML="<div class='fb "+(right?"ok":"no")+"'>"+esc(item.why)+"</div><button type='button' class='btn primary sm' style='margin-top:10px' id='qnext'>"+(qi+1<QZ.length?"Next question":"See score")+"</button>";
+        $("#qnext").addEventListener("click",function(){qi++;renderQ()});
+      });
+    });
+  }
+  renderQ();
+
+  var CK=[
+    ["Refreshed MT5 Navigator","Right-clicked Expert Advisors -> Refresh on your MT5 terminal."],
+    ["Opened a Demo Gold (XAUUSD) chart","Confirmed the account header says Demo before attaching the panel."],
+    ["Loaded a Gold preset file","Clicked Inputs -> Load and picked Protected or Parity preset."],
+    ["Removed any old external TP/SL utility","Only NAVI Trade Panel is attached to the chart."],
+    ["Checked Algo Trading is green","Confirmed the panel appears and GRD status shows OK."],
+    ["Tested a tiny 0.01 demo trade","Watched the built-in $1.00 Auto-Exit or X CLOSE ALL work smoothly."]
+  ];
+  var ckHost=$("#ck");
+  CK.forEach(function(row,i){
+    var lb=document.createElement("label");
+    lb.innerHTML="<input type='checkbox' data-c='"+i+"'><span><span class='cktitle'>"+esc(row[0])+"</span><span class='ckhelp'>"+esc(row[1])+"</span></span>";
+    ckHost.appendChild(lb);
+  });
+  function syncCk(){
+    var boxes=$$("#ck input"), n=0;
+    boxes.forEach(function(b){
+      b.closest("label").classList.toggle("done", b.checked);
+      if(b.checked) n++;
+    });
+    $("#ckm").style.width=(n/boxes.length*100)+"%";
+    $("#ckt").textContent=n+" of "+boxes.length+" checked";
+  }
+  ckHost.addEventListener("change",syncCk);
+  syncCk();
+
+  var GL=[
+    ["Preset (.set file)","A ready-made settings bundle you load in 2 clicks so you never have to type numbers manually."],
+    ["$1.00 Auto-Exit (Virtual TP)","Closes each winning trade automatically once profit reaches $1.00 without needing a second helper tool."],
+    ["Group Mode (Serial)","Manages all open Buy trades (or Sell trades) together using one shared average Break-Even line."],
+    ["Break-Even (NoLoss)","Moves your safety stop to your entry price once a trade moves in your favor, helping protect against turning a winner into a loss."],
+    ["FIX Target Line","Lets you drag a horizontal line on the chart to preview exact dollar profit, then press FIX once to lock it in."],
+    ["Skipped Risky Hours","A built-in clock filter that pauses new trades during high-spike hours while still letting open trades close in profit."],
+    ["Daily Loss Brake","Stops trading for the rest of the day automatically if total losses reach your chosen percentage cap."],
+    ["Margin Shield","Watches your free account cushion and automatically shrinks new trade sizes if margin gets tight."],
+    ["Spread Limit","Pauses entries during sudden broker spread spikes so you do not enter at a bad price."],
+    ["Magic = 0","Tells the panel to also manage any manual Gold trades you click yourself on the same chart."]
+  ];
+  function renderGl(q){
+    var s=(q||"").trim().toLowerCase();
+    var list=GL.filter(function(it){return !s || it[0].toLowerCase().indexOf(s)>=0 || it[1].toLowerCase().indexOf(s)>=0});
+    $("#gl").innerHTML=list.length
+      ? list.map(function(it){return "<div><b>"+esc(it[0])+"</b><p>"+esc(it[1])+"</p></div>"}).join("")
+      : "<div><b>No matching word</b><p>Try searching Preset, Shield, FIX, or Break-Even.</p></div>";
+  }
+  $("#gs").addEventListener("input",function(e){renderGl(e.target.value)});
+  renderGl("");
+})();
+</script>
+</body>
+</html>
