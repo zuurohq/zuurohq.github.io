@@ -1192,7 +1192,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
           "<p class='muted' style='margin-top:10px'>Every open trade is watched tick by tick. The moment a trade reaches <strong>+$1.00</strong> (after swap), the NAVI panel closes it immediately and locks in the win.</p>"+
           "<ul class='step-list'>"+
             "<li>Replaces external currency TP/SL utility EAs completely.</li>"+
-            "<li>Works cleanly with manual trades too when Magic is 0.</li>"+
+            "<li>Each preset uses its own unique Zuuro Magic Number so it never touches manual trades or other EAs on the same terminal.</li>"+
             "<li>You can change $1.00 to $1.50, $2.00, or any dollar amount in Inputs.</li>"+
           "</ul></div>"+
       "</div>",
@@ -1419,7 +1419,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
     ["Exact Match ($1 Auto-Exit)","Exact Buy and Sell virtual $1.00 exit (broker SL=0, TP=0) with full 17-step ladder and optional shields OFF."],
     ["Order Comment Tag (ZTP|...)","Unique post-trade analytics stamp (for example ZTP|B|L1|+83|WPMC|H1) recording direction, step, signal score, active indicators, and timeframe within MT5's 31-character limit."],
     ["Global Variables (F3)","Saved MT5 panel memory that remembers your button clicks across timeframe switches and restarts. Loading a new .set preset automatically applies the new preset values."],
-    ["Magic = 0","Tells the panel to also manage manual Gold trades on the same chart. If you run two EAs on Gold at the same time, give NAVI Trade Panel its own Magic number (for example 260501) so they stay completely separate."]
+    ["Unique Magic Number","Each preset carries its own 8-digit Zuuro Magic Number (for example 11012002 for Gold v3 Protected and 11011002 for Parity). Because Magic must be above 0, the EA only manages its own trades and never touches manual trades or other EAs, making multi-chart running completely safe."]
   ];
   function renderGl(q){
     var s=(q||"").trim().toLowerCase();
