@@ -500,6 +500,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
       <button type="button" class="tab" role="tab" aria-selected="false" data-ex="basket">Close Whole Group Together</button>
       <button type="button" class="tab" role="tab" aria-selected="false" data-ex="hours">Skip the 4 Risky Hours</button>
       <button type="button" class="tab" role="tab" aria-selected="false" data-ex="comments">Read Your Trade Tags</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-ex="opt">Auto Settings Finder (Optimizer)</button>
     </div>
 
     <div class="card" id="exitBody" aria-live="polite"></div>
@@ -1240,6 +1241,26 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
           "<div><span>H1</span><b>Timeframe</b><div class='faint small' style='margin-top:4px'>Chart timeframe (M1, M30, H1)</div></div>"+
         "</div>"+
         "<div class='callout'><strong>Indicator codes:</strong> RS (RSI), ST (Stoch), WP (Williams %R), CC (CCI), AD (ADX), MC (MACD), AO (Awesome Osc), MO (Momentum), DM (DeMarker), EM (EMA), MN (Manual), plus <strong>i</strong> when Invert is ON.</div>"+
+      "</div>",
+    opt:
+      "<div><span class='tag'>5-MINUTE NON-TECHIE WORKFLOW</span><h3 style='display:inline'>How to run the MT5 Genetic Optimizer for any symbol</h3>"+
+        "<p class='muted' style='margin-top:10px'>Instead of guessing numbers by hand, MT5 tests thousands of combinations across your CPU cores automatically. Our built-in <strong>Custom max</strong> score throws out lucky low-trade settings and anything above 35% drawdown.</p>"+
+        "<div class='out' style='margin:14px 0'>"+
+          "<div><span>Step 1 · Open</span><b>Press Ctrl+R</b><div class='faint small' style='margin-top:4px'>Pick symbol, M5, Last 3 months, Forward 1/4, Visual OFF</div></div>"+
+          "<div><span>Step 2 · Load</span><b>Load Optimizer .set</b><div class='faint small' style='margin-top:4px'>Inputs tab -> Right-click -> Load your symbol template</div></div>"+
+          "<div><span>Step 3 · Run</span><b>Fast Genetic</b><div class='faint small' style='margin-top:4px'>Set Criterion to Custom max and click Start</div></div>"+
+          "<div><span>Step 4 · Pick</span><b>Medium Risk</b><div class='faint small' style='margin-top:4px'>Forward tab: DD <= 15%, PF >= 1.6, 50+ trades -> Save</div></div>"+
+        "</div>"+
+        "<strong class='small'>All 6 symbols ready in your MT5 Presets &amp; Tester folders (unique Zuuro Magic Numbers):</strong>"+
+        "<div class='gl' style='margin-top:10px'>"+
+          "<div><b>Gold (XAUUSD)</b><p class='mono small'>Zuuro_Gold_v3_Protected.set (11012002)<br>Optimizer: Zuuro_Gold_v3_Optimizer_ValueTP.set (11014002)</p></div>"+
+          "<div><b>EURUSD</b><p class='mono small'>Zuuro_EURUSD_MediumRisk_M5.set (11005001)<br>Optimizer: Zuuro_EURUSD_Optimizer.set (11095001)</p></div>"+
+          "<div><b>USDJPY</b><p class='mono small'>Zuuro_USDJPY_MediumRisk_M5.set (11005003)<br>Optimizer: Zuuro_USDJPY_Optimizer.set (11095003)</p></div>"+
+          "<div><b>Silver (XAGUSD)</b><p class='mono small'>Zuuro_XAGUSD_MediumRisk_M5.set (11005004)<br>Optimizer: Zuuro_XAGUSD_Optimizer.set (11095004)</p></div>"+
+          "<div><b>US100 (NAS100)</b><p class='mono small'>Zuuro_US100_MediumRisk_M5.set (11005005)<br>Optimizer: Zuuro_US100_Optimizer.set (11095005)</p></div>"+
+          "<div><b>BTCUSD (24/7)</b><p class='mono small'>Zuuro_BTCUSD_MediumRisk_M5.set (11005006)<br>Optimizer: Zuuro_BTCUSD_Optimizer.set (11095006)</p></div>"+
+        "</div>"+
+        "<div class='callout'><strong>Tip:</strong> Turning on <strong>Forward: 1/4</strong> makes MT5 optimize on the first 9 weeks and test the winners blindly on the latest 3 weeks so you avoid overfitted settings.</div>"+
       "</div>"
   };
   function renderExit(k){
