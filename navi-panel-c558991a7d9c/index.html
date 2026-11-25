@@ -335,7 +335,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
 
 <nav class="top" aria-label="Primary">
   <div class="wrap">
-    <a class="brand" href="#main"><span class="dot" aria-hidden="true"></span>NAVI Trade Panel <span class="btag">Visual Guide</span></a>
+    <a class="brand" href="#main"><span class="dot" aria-hidden="true"></span>NAVI Trade Panel <span class="btag">v1.10 Guide</span></a>
     <div class="links" aria-label="Sections">
       <a href="#start">Quick start</a>
       <a href="#presets">Pick a preset</a>
@@ -356,7 +356,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
 <main id="main" tabindex="-1">
 <section class="first hero">
   <div class="wrap">
-    <span class="chip"><b>Educational only, not advice</b> Paper and demo accounts</span>
+    <span class="chip"><b>Educational only, not advice</b> Paper and demo accounts · Matches EA v1.10</span>
     <h1>Trade Gold on MT5 with clarity.<br>No tech skills needed.</h1>
     <p class="lede" style="margin-top:18px">This visual, click-and-try guide shows you how the NAVI Trade Panel works on MetaTrader 5. Pick a ready-made preset, test the live interactive Gold chart below, see how the built-in $1 auto-exit locks in profit, and switch safety shields on or off.</p>
     <div class="cta-row">
@@ -499,6 +499,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
       <button type="button" class="tab" role="tab" aria-selected="true" data-ex="pertrade">Close Each Trade at $1</button>
       <button type="button" class="tab" role="tab" aria-selected="false" data-ex="basket">Close Whole Group Together</button>
       <button type="button" class="tab" role="tab" aria-selected="false" data-ex="hours">Skip the 4 Risky Hours</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-ex="comments">Read Your Trade Tags</button>
     </div>
 
     <div class="card" id="exitBody" aria-live="polite"></div>
@@ -616,7 +617,7 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
   <div class="wrap">
     Paper and demo accounts. Educational only. Not investment advice. <a href="#disclaimer">Disclaimer and Terms</a>
     <span class="fbrand">
-      NAVI Trade Panel - a product of Zuuro HQ.<br>
+      NAVI Trade Panel - a product of Zuuro HQ. (EA v1.10)<br>
       All Rights Reserved | ZuuroHQ<br>
       Built with <span role="img" aria-label="love">&#10084;&#65039;</span> from <span role="img" aria-label="the United Kingdom">&#127468;&#127463;</span>
     </span>
@@ -1227,6 +1228,18 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
         }).join("")+
         "</div>"+
         "<div class='callout'><strong>Remember:</strong> Pausing an hour never locks you out of exits. Any open trade can still hit its +$1.00 Auto-Exit or Trail Stop normally.</div>"+
+      "</div>",
+    comments:
+      "<div><span class='tag'>POST-TRADE ANALYTICS (EA v1.10)</span><h3 style='display:inline'>How to read every trade tag in MT5 History</h3>"+
+        "<p class='muted' style='margin-top:10px'>Every trade opened by NAVI Trade Panel writes a compact, unique Zuuro tracking tag (always 31 characters or fewer) into MT5's Comment column so you can review which indicator combo and timeframe worked best.</p>"+
+        "<div class='copyrow' style='margin:14px 0'><code style='font-size:1.05rem;font-weight:700;color:var(--accent)'>ZTP|B|L1|+83|WPMC|H1</code><span class='faint small'>Example live comment (20 of 31 chars)</span></div>"+
+        "<div class='out'>"+
+          "<div><span>ZTP | B</span><b>Prefix &amp; Side</b><div class='faint small' style='margin-top:4px'>NAVI Panel Buy (or S for Sell)</div></div>"+
+          "<div><span>L1 / MAN</span><b>Step or Click</b><div class='faint small' style='margin-top:4px'>Grid Step #1 (or MAN manual)</div></div>"+
+          "<div><span>+83 | WPMC</span><b>Signal Combo</b><div class='faint small' style='margin-top:4px'>Score +83 from WPR + MACD</div></div>"+
+          "<div><span>H1</span><b>Timeframe</b><div class='faint small' style='margin-top:4px'>Chart timeframe (M1, M30, H1)</div></div>"+
+        "</div>"+
+        "<div class='callout'><strong>Indicator codes:</strong> RS (RSI), ST (Stoch), WP (Williams %R), CC (CCI), AD (ADX), MC (MACD), AO (Awesome Osc), MO (Momentum), DM (DeMarker), EM (EMA), MN (Manual), plus <strong>i</strong> when Invert is ON.</div>"+
       "</div>"
   };
   function renderExit(k){
@@ -1403,7 +1416,10 @@ footer{padding:36px 0 56px;color:var(--ink3);font-size:.86rem;border-top:1px sol
     ["Daily Loss Brake","Stops trading for the rest of the day automatically if total losses reach your chosen percentage cap."],
     ["Margin Shield","Watches your free account cushion and automatically shrinks new trade sizes if margin gets tight."],
     ["Spread Limit","Pauses entries during sudden broker spread spikes so you do not enter at a bad price."],
-    ["Magic = 0","Tells the panel to also manage any manual Gold trades you click yourself on the same chart."]
+    ["Exact Match ($1 Auto-Exit)","Exact Buy and Sell virtual $1.00 exit (broker SL=0, TP=0) with full 17-step ladder and optional shields OFF."],
+    ["Order Comment Tag (ZTP|...)","Unique post-trade analytics stamp (for example ZTP|B|L1|+83|WPMC|H1) recording direction, step, signal score, active indicators, and timeframe within MT5's 31-character limit."],
+    ["Global Variables (F3)","Saved MT5 panel memory that remembers your button clicks across timeframe switches and restarts. Loading a new .set preset automatically applies the new preset values."],
+    ["Magic = 0","Tells the panel to also manage manual Gold trades on the same chart. If you run two EAs on Gold at the same time, give NAVI Trade Panel its own Magic number (for example 260501) so they stay completely separate."]
   ];
   function renderGl(q){
     var s=(q||"").trim().toLowerCase();
